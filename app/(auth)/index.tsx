@@ -1,6 +1,7 @@
 import { shadowStyle } from "@/constants/shadow";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   ScrollView,
@@ -18,6 +19,8 @@ export default function Index() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const router = useRouter();
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -81,7 +84,7 @@ export default function Index() {
                 />
               </TouchableOpacity>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => router.push("/(auth)/forgot")}>
               <Text className="text-[#F6329A] text-right mb-4">
                 Forget password?
               </Text>
@@ -104,6 +107,7 @@ export default function Index() {
                 Don't have an account?
               </Text>
               <TouchableOpacity
+                onPress={() => router.push("/(auth)/signup")}
                 className="border border-[#F6329A] py-2 px-3"
                 style={{ borderRadius: 6, borderWidth: 2 }}
               >
