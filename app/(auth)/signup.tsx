@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
+  Image,
   ScrollView,
   Text,
   TextInput,
@@ -11,9 +12,6 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import AppleIcon from "../../assets/authIcon/apple.svg";
-import FacebookIcon from "../../assets/authIcon/facebook.svg";
-import GoogleIcon from "../../assets/authIcon/google.svg";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -23,6 +21,14 @@ export default function Signup() {
   const [showPassword2, setShowPassword2] = useState(false);
 
   const router = useRouter();
+
+  const handleSubmit = () => {
+    console.log(email);
+    router.push({
+      pathname: "/(auth)/otp",
+      params: { purpose: "signup", email: email },
+    });
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -125,9 +131,9 @@ export default function Signup() {
               className="rounded-md py-3 mb-4"
               style={{ borderRadius: 8 }}
             >
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handleSubmit()}>
                 <Text className="text-center text-xl font-bold text-white">
-                  Log in
+                  Sign In
                 </Text>
               </TouchableOpacity>
             </LinearGradient>
@@ -140,7 +146,7 @@ export default function Signup() {
                 className="border border-[#F6329A] py-2 px-3"
                 style={{ borderRadius: 6, borderWidth: 2 }}
               >
-                <Text className="text-[#F6329A] font-semibold">Sign In</Text>
+                <Text className="text-[#F6329A] font-semibold">Log In</Text>
               </TouchableOpacity>
             </View>
             <View className="flex-row items-center mb-4">
@@ -151,15 +157,24 @@ export default function Signup() {
               <View className="flex-1 h-0.5 bg-[#636363]" />
             </View>
             <TouchableOpacity className="bg-white p-3 mb-2 rounded-md flex-row items-center justify-center gap-3 border border-gray-300">
-              <GoogleIcon width={30} height={30} />
+              <Image
+                source={require("../../assets/authIcon/google.png")}
+                className="h-8 w-8"
+              />
               <Text className="text-gray-800 font-bold text-xl">Google</Text>
             </TouchableOpacity>
             <TouchableOpacity className="bg-white p-3 mb-2 rounded-md flex-row items-center justify-center gap-3 border border-gray-300">
-              <FacebookIcon white={30} height={30} />
+              <Image
+                source={require("../../assets/authIcon/facebook.png")}
+                className="h-8 w-8"
+              />
               <Text className="text-gray-800 font-bold text-xl">Facebook</Text>
             </TouchableOpacity>
             <TouchableOpacity className="bg-white p-3 mb-2 rounded-md flex-row items-center justify-center gap-3 border border-gray-300">
-              <AppleIcon white={30} height={30} />
+              <Image
+                source={require("../../assets/authIcon/apple.png")}
+                className="h-8 w-8"
+              />
               <Text className="text-gray-800 font-bold text-xl">Apple</Text>
             </TouchableOpacity>
           </View>

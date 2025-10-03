@@ -17,6 +17,13 @@ export default function forgot() {
 
   const router = useRouter();
 
+  const handleSubmit = () => {
+    router.push({
+      pathname: "/(auth)/otp",
+      params: { purpose: "password_reset", email },
+    });
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -63,7 +70,7 @@ export default function forgot() {
               className="rounded-md py-3 mb-4"
               style={{ borderRadius: 8 }}
             >
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handleSubmit()}>
                 <Text className="text-center text-xl font-bold text-white">
                   Confirm
                 </Text>
