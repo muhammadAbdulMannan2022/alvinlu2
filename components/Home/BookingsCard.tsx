@@ -22,6 +22,7 @@ interface BookingCardProp {
   start_time: string;
   end_time: string;
   note?: string;
+  setItemSheetOpen: ((arg0: string | number) => void) | undefined;
 }
 
 export default function BookingsCard({
@@ -38,9 +39,12 @@ export default function BookingsCard({
   note,
   start_time,
   end_time,
+  setItemSheetOpen,
 }: BookingCardProp) {
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback
+      onPress={() => setItemSheetOpen && setItemSheetOpen(id)}
+    >
       <View>
         <ImageBackground
           source={{ uri: service_img }}

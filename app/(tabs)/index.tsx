@@ -1,11 +1,20 @@
 import BookingsCard from "@/components/Home/BookingsCard";
 import TopPart from "@/components/Home/TopPart";
+import CustomBottomSheet from "@/components/ReuseableBottomSheets/CustomBottomSheet";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useState } from "react";
-import { FlatList, ScrollView, Text, View } from "react-native";
+import {
+  FlatList,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [data, setData] = useState([
     {
       id: 1,
@@ -118,7 +127,7 @@ export default function Index() {
       end_time: "2:30 PM",
     },
   ]);
-
+  const snapPoints = ["90%"];
   const today = new Date("2025-10-04").toISOString().split("T")[0];
   const tomorrow = new Date("2025-10-05").toISOString().split("T")[0];
   const todaysBookings = data.filter((item) => item.date === today);
@@ -126,73 +135,114 @@ export default function Index() {
   const nextBookings = data.filter((item) => item.date < today);
   const bottomBarHeight = useBottomTabBarHeight();
 
+  const openSheet1 = (id: string | number) => {
+    setIsOpen(true);
+    console.log(id);
+  };
+
   return (
-    <SafeAreaView
-      className="flex-1 bg-white"
-      style={{ paddingBottom: bottomBarHeight - 25 }}
-    >
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View className="px-4 bg-white">
-          <TopPart />
-        </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaView
+        className="flex-1 bg-white"
+        style={{ paddingBottom: bottomBarHeight - 25 }}
+      >
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <View className="px-4 bg-white">
+            <TopPart />
+          </View>
 
-        {/* Today's bookings */}
-        <View className="mt-4">
-          <Text className="text-xl md:text-3xl font-bold px-4">
-            Today's Bookings
-          </Text>
-          <FlatList
-            data={todaysBookings}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => <BookingsCard {...item} />}
-            keyExtractor={(item) => item.id.toString()}
-            contentContainerStyle={{
-              paddingVertical: 8,
-              gap: 10,
-              paddingHorizontal: 10,
-            }}
-          />
-        </View>
+          {/* Today's bookings */}
+          <View className="mt-4">
+            <Text className="text-xl md:text-3xl font-bold px-4">
+              Today's Bookings
+            </Text>
+            <FlatList
+              data={todaysBookings}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <BookingsCard setItemSheetOpen={openSheet1} {...item} />
+              )}
+              keyExtractor={(item) => item.id.toString()}
+              contentContainerStyle={{
+                paddingVertical: 8,
+                gap: 10,
+                paddingHorizontal: 10,
+              }}
+            />
+          </View>
 
-        {/* Tomorrow's Bookings */}
-        <View className="mt-4">
-          <Text className="text-xl md:text-3xl font-bold px-4">
-            Tomorrow's Bookings
-          </Text>
-          <FlatList
-            data={tomorrowsBookings}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => <BookingsCard {...item} />}
-            keyExtractor={(item) => item.id.toString()}
-            contentContainerStyle={{
-              paddingVertical: 8,
-              gap: 10,
-              paddingHorizontal: 10,
-            }}
-          />
-        </View>
+          {/* Tomorrow's Bookings */}
+          <View className="mt-4">
+            <Text className="text-xl md:text-3xl font-bold px-4">
+              Tomorrow's Bookings
+            </Text>
+            <FlatList
+              data={tomorrowsBookings}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <BookingsCard setItemSheetOpen={openSheet1} {...item} />
+              )}
+              keyExtractor={(item) => item.id.toString()}
+              contentContainerStyle={{
+                paddingVertical: 8,
+                gap: 10,
+                paddingHorizontal: 10,
+              }}
+            />
+          </View>
 
-        {/* Next Bookings */}
-        <View className="mt-4">
-          <Text className="text-xl md:text-3xl font-bold px-4">
-            Next Bookings
+          {/* Next Bookings */}
+          <View className="mt-4">
+            <Text className="text-xl md:text-3xl font-bold px-4">
+              Next Bookings
+            </Text>
+            <FlatList
+              data={nextBookings}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <BookingsCard setItemSheetOpen={openSheet1} {...item} />
+              )}
+              keyExtractor={(item) => item.id.toString()}
+              contentContainerStyle={{
+                paddingVertical: 8,
+                gap: 10,
+                paddingHorizontal: 10,
+              }}
+            />
+          </View>
+        </ScrollView>
+        {/* sheet 1 */}
+        <CustomBottomSheet
+          isOpen={isOpen}
+          onChange={setIsOpen}
+          snapPoints={snapPoints}
+          bottomInset={bottomBarHeight}
+        >
+          <Text style={{ fontSize: 20, color: "#000" }}>Hello World</Text>
+          <Text style={{ fontSize: 16, color: "#000" }}>
+            This is a test to ensure visibility.
           </Text>
-          <FlatList
-            data={nextBookings}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => <BookingsCard {...item} />}
-            keyExtractor={(item) => item.id.toString()}
-            contentContainerStyle={{
-              paddingVertical: 8,
-              gap: 10,
-              paddingHorizontal: 10,
+          <TouchableOpacity
+            onPress={() => {
+              setIsOpen(false);
+              console.log("Closing BottomSheet");
             }}
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+            style={{
+              padding: 10,
+              backgroundColor: "#FF5555",
+              borderRadius: 5,
+              marginTop: 10,
+            }}
+          >
+            <Text style={{ color: "#fff", textAlign: "center" }}>
+              Close Bottom Sheet
+            </Text>
+          </TouchableOpacity>
+        </CustomBottomSheet>
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }

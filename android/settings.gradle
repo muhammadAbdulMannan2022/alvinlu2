@@ -37,11 +37,3 @@ expoAutolinking.useExpoVersionCatalog()
 
 include ':app'
 includeBuild(expoAutolinking.reactNativeGradlePlugin)
-
-// Ensure react-native-worklets (native worklets module) is included so
-// react-native-reanimated can find it during the Gradle configuration.
-def rnWorkletsPath = new File(rootDir, "../node_modules/react-native-worklets/android")
-if (rnWorkletsPath.exists()) {
-  include ':react-native-worklets'
-  project(':react-native-worklets').projectDir = rnWorkletsPath
-}
