@@ -1,4 +1,10 @@
-import { Entypo, Feather, FontAwesome5, Ionicons } from "@expo/vector-icons";
+import {
+  Entypo,
+  Feather,
+  FontAwesome,
+  FontAwesome5,
+  Ionicons,
+} from "@expo/vector-icons";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
@@ -7,7 +13,7 @@ import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Sheet1() {
+export default function Sheet1({ openLate, setIsOpen }: any) {
   const [showOption, setShowOption] = useState(true);
   const [data] = useState({
     client: {
@@ -238,7 +244,7 @@ export default function Sheet1() {
         </View>
       </View>
       {/* Action Buttons */}
-      {showOption && (
+      {showOption ? (
         <View
           className="px-4 pb-4 fixed bg-red-200 w-full py-5"
           style={{ bottom: bottomBarHeight / 2 }}
@@ -254,7 +260,11 @@ export default function Sheet1() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => setShowOption(!showOption)}
+              onPress={() => {
+                // setIsOpen(false);
+                openLate(true);
+                setShowOption(!showOption);
+              }}
               className="bg-white border p-2 rounded-lg flex-row items-center justify-center  w-[50%]"
             >
               <Text className="text-black font-bold text-base">
@@ -283,6 +293,14 @@ export default function Sheet1() {
             </TouchableOpacity>
           </View>
         </View>
+      ) : (
+        <TouchableOpacity
+          className="bg-[#000000] flex-row justify-center items-center gap-4 py-2.5"
+          style={{ borderRadius: 5 }}
+        >
+          <FontAwesome name="credit-card-alt" size={20} color="#fff" />
+          <Text className="text-white">Complet & Checkout</Text>
+        </TouchableOpacity>
       )}
     </ScrollView>
   );

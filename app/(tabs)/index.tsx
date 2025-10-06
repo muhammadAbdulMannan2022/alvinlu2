@@ -1,4 +1,5 @@
 import BookingsCard from "@/components/Home/BookingsCard";
+import LateSheet from "@/components/Home/Sheets/LateSheet";
 import Sheet1 from "@/components/Home/Sheets/Sheet1";
 import TopPart from "@/components/Home/TopPart";
 import CustomBottomSheet from "@/components/ReuseableBottomSheets/CustomBottomSheet";
@@ -10,6 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isLateOpen, setIsLateOpen] = useState<boolean>(false);
   const [data, setData] = useState([
     {
       id: 1,
@@ -214,25 +216,18 @@ export default function Index() {
           isOpen={isOpen}
           onChange={setIsOpen}
           snapPoints={snapPoints}
+          // bottomInset={bottomBarHeight}
+        >
+          <Sheet1 setIsOpen={setIsOpen} openLate={setIsLateOpen} />
+        </CustomBottomSheet>
+        {/* sheet 2 for late late */}
+        <CustomBottomSheet
+          isOpen={isLateOpen}
+          onChange={setIsLateOpen}
+          snapPoints={["50%"]}
           bottomInset={bottomBarHeight}
         >
-          <Sheet1 />
-          {/* <TouchableOpacity
-            onPress={() => {
-              setIsOpen(false);
-              console.log("Closing BottomSheet");
-            }}
-            style={{
-              padding: 10,
-              backgroundColor: "#FF5555",
-              borderRadius: 5,
-              marginTop: 10,
-            }}
-          >
-            <Text style={{ color: "#fff", textAlign: "center" }}>
-              Close Bottom Sheet
-            </Text>
-          </TouchableOpacity> */}
+          <LateSheet setIsLateOpen={setIsLateOpen} />
         </CustomBottomSheet>
       </SafeAreaView>
     </GestureHandlerRootView>
