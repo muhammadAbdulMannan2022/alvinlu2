@@ -1,15 +1,10 @@
 import BookingsCard from "@/components/Home/BookingsCard";
+import Sheet1 from "@/components/Home/Sheets/Sheet1";
 import TopPart from "@/components/Home/TopPart";
 import CustomBottomSheet from "@/components/ReuseableBottomSheets/CustomBottomSheet";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useState } from "react";
-import {
-  FlatList,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { FlatList, ScrollView, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -221,11 +216,8 @@ export default function Index() {
           snapPoints={snapPoints}
           bottomInset={bottomBarHeight}
         >
-          <Text style={{ fontSize: 20, color: "#000" }}>Hello World</Text>
-          <Text style={{ fontSize: 16, color: "#000" }}>
-            This is a test to ensure visibility.
-          </Text>
-          <TouchableOpacity
+          <Sheet1 />
+          {/* <TouchableOpacity
             onPress={() => {
               setIsOpen(false);
               console.log("Closing BottomSheet");
@@ -240,7 +232,7 @@ export default function Index() {
             <Text style={{ color: "#fff", textAlign: "center" }}>
               Close Bottom Sheet
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </CustomBottomSheet>
       </SafeAreaView>
     </GestureHandlerRootView>

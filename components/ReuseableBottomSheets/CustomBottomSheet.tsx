@@ -1,6 +1,6 @@
 import BottomSheet, {
   BottomSheetBackdropProps,
-  BottomSheetView,
+  BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
 import { useEffect, useRef } from "react";
 import { StyleProp, StyleSheet, ViewStyle } from "react-native";
@@ -19,7 +19,6 @@ interface CustomBottomSheetProps {
   style?: StyleProp<ViewStyle>;
 }
 
-// 🖤 Backdrop: under sheet but over everything else
 const BackdropComponent: React.FC<BottomSheetBackdropProps> = ({
   animatedIndex,
   style: backdropStyle,
@@ -72,21 +71,23 @@ const CustomBottomSheet: React.FC<CustomBottomSheetProps> = ({
       index={isOpen ? 0 : -1}
       bottomInset={bottomInset}
       enablePanDownToClose
-      style={[{ zIndex: 50 }, style]} // sheet layer
+      style={[{ zIndex: 50 }, style]}
       backdropComponent={(props) => <BackdropComponent {...props} />}
       onChange={(index) => {
         if (onChange) onChange(index >= 0);
       }}
+      enableContentPanningGesture={true}
+      enableHandlePanningGesture={true} // Ensure handle can be used to drag
     >
-      <BottomSheetView
+      <BottomSheetScrollView
         style={{
+          flex: 1, // Allow BottomSheetView to take full height
           padding: 16,
           backgroundColor: "#fff",
-          minHeight: 200,
         }}
       >
         {children}
-      </BottomSheetView>
+      </BottomSheetScrollView>
     </BottomSheet>
   );
 };
