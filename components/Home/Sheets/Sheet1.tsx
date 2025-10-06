@@ -13,7 +13,12 @@ import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Sheet1({ openLate, setIsOpen, setIsPaymentOpen }: any) {
+export default function Sheet1({
+  openLate,
+  setIsOpen,
+  setIsPaymentOpen,
+  setIsEditBookingOpen,
+}: any) {
   const [showOption, setShowOption] = useState(true);
   const [data] = useState({
     client: {
@@ -80,7 +85,10 @@ export default function Sheet1({ openLate, setIsOpen, setIsPaymentOpen }: any) {
         <View className="mt-5 px-4">
           <View className="flex-row justify-between items-center">
             <Text className="text-lg font-bold">Booking Information</Text>
-            <TouchableOpacity className="flex-row items-center gap-2">
+            <TouchableOpacity
+              onPress={() => setIsEditBookingOpen(true)}
+              className="flex-row items-center gap-2"
+            >
               <FontAwesome6 name="edit" size={20} color="black" />
               <Text className="text-lg font-semibold">Edit</Text>
             </TouchableOpacity>

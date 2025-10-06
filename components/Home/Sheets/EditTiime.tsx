@@ -1,0 +1,156 @@
+import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Calendar } from "react-native-calendars";
+
+const EditTimeOfBooking: React.FC = () => {
+  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedTime, setSelectedTime] = useState<string>("");
+  const [addOns, setAddOns] = useState<string[]>([]);
+  const [newAddOn, setNewAddOn] = useState<string>("");
+
+  const timeSlots: string[] = [
+    "09:00",
+    "09:30",
+    "10:00",
+    "10:30",
+    "11:00",
+    "11:30",
+    "12:00",
+    "12:30",
+    "13:00",
+    "13:30",
+    "14:00",
+    "14:30",
+    "15:00",
+    "15:30",
+    "16:00",
+    "16:30",
+    "17:00",
+    "17:30",
+    "18:00",
+    "18:30",
+    "19:00",
+    "19:30",
+  ];
+
+  const handleAddAddOn = () => {
+    if (newAddOn.trim()) {
+      setAddOns([...addOns, newAddOn]);
+      setNewAddOn("");
+    }
+  };
+
+  const handleRemoveAddOn = (index: number) => {
+    setAddOns(addOns.filter((_, i) => i !== index));
+  };
+
+  return (
+    <View style={{ padding: 20 }}>
+      <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 10 }}>
+        Date & Time
+      </Text>
+      <Calendar
+        current={new Date().toISOString().split("T")[0]}
+        onDayPress={(day) => setSelectedDate(day.dateString)}
+        markedDates={{
+          [selectedDate]: {
+            selected: true,
+            marked: false,
+            selectedColor: "black",
+          },
+        }}
+        theme={{
+          selectedDayBackgroundColor: "black",
+          todayTextColor: "#00adf5",
+        }}
+      />
+      <Text style={{ fontSize: 16, fontWeight: "bold", marginTop: 20 }}>
+        Select Time
+      </Text>
+      <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 10 }}>
+        {timeSlots.map((time) => (
+          <TouchableOpacity
+            key={time}
+            style={{
+              backgroundColor: selectedTime === time ? "black" : "white",
+              padding: 10,
+              margin: 5,
+              borderWidth: 1,
+              borderColor: "#ccc",
+              borderRadius: 5,
+            }}
+            onPress={() => setSelectedTime(time)}
+          >
+            <Text style={{ color: selectedTime === time ? "white" : "black" }}>
+              {time}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+      <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 20 }}>
+        Service Details
+      </Text>
+      <TextInput
+        style={{
+          borderWidth: 1,
+          borderColor: "#ccc",
+          padding: 10,
+          marginVertical: 10,
+          borderRadius: 5,
+        }}
+        value="Classic French"
+        editable={false}
+      />
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Add-ons</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginVertical: 10,
+        }}
+      >
+        <TextInput
+          style={{
+            flex: 1,
+            borderWidth: 1,
+            borderColor: "#ccc",
+            padding: 10,
+            borderRadius: 5,
+          }}
+          value={newAddOn}
+          onChangeText={setNewAddOn}
+          placeholder="Enter add-on"
+        />
+        <Button title="Add" onPress={handleAddAddOn} />
+      </View>
+      {addOns.map((item, index) => (
+        <View
+          key={index}
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginVertical: 5,
+          }}
+        >
+          <Text style={{ flex: 1 }}>{item}</Text>
+          <TouchableOpacity onPress={() => handleRemoveAddOn(index)}>
+            <Ionicons name="close-circle" size={24} color="red" />
+          </TouchableOpacity>
+        </View>
+      ))}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginTop: 20,
+        }}
+      >
+        <Button title="Cancel" color="gray" />
+        <Button title="Save Changes" color="#000" />
+      </View>
+    </View>
+  );
+};
+
+export default EditTimeOfBooking;
