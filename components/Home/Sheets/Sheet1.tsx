@@ -13,7 +13,7 @@ import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function Sheet1({ openLate, setIsOpen }: any) {
+export default function Sheet1({ openLate, setIsOpen, setIsPaymentOpen }: any) {
   const [showOption, setShowOption] = useState(true);
   const [data] = useState({
     client: {
@@ -295,6 +295,7 @@ export default function Sheet1({ openLate, setIsOpen }: any) {
         </View>
       ) : (
         <TouchableOpacity
+          onPress={() => setIsPaymentOpen(true)}
           className="bg-[#000000] flex-row justify-center items-center gap-4 py-2.5"
           style={{ borderRadius: 5 }}
         >

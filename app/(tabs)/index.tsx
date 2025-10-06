@@ -1,5 +1,6 @@
 import BookingsCard from "@/components/Home/BookingsCard";
 import LateSheet from "@/components/Home/Sheets/LateSheet";
+import PaymentComplete from "@/components/Home/Sheets/PaymentComplete";
 import Sheet1 from "@/components/Home/Sheets/Sheet1";
 import TopPart from "@/components/Home/TopPart";
 import CustomBottomSheet from "@/components/ReuseableBottomSheets/CustomBottomSheet";
@@ -12,6 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Index() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLateOpen, setIsLateOpen] = useState<boolean>(false);
+  const [isPaymentOpen, setIsPaymentOpen] = useState<boolean>(false);
   const [data, setData] = useState([
     {
       id: 1,
@@ -218,7 +220,11 @@ export default function Index() {
           snapPoints={snapPoints}
           // bottomInset={bottomBarHeight}
         >
-          <Sheet1 setIsOpen={setIsOpen} openLate={setIsLateOpen} />
+          <Sheet1
+            setIsOpen={setIsOpen}
+            openLate={setIsLateOpen}
+            setIsPaymentOpen={setIsPaymentOpen}
+          />
         </CustomBottomSheet>
         {/* sheet 2 for late late */}
         <CustomBottomSheet
@@ -228,6 +234,15 @@ export default function Index() {
           bottomInset={bottomBarHeight}
         >
           <LateSheet setIsLateOpen={setIsLateOpen} />
+        </CustomBottomSheet>
+        {/* payment sheet */}
+        <CustomBottomSheet
+          isOpen={isPaymentOpen}
+          onChange={setIsPaymentOpen}
+          snapPoints={["90%"]}
+          bottomInset={bottomBarHeight}
+        >
+          <PaymentComplete setIsPaymentOpen={setIsPaymentOpen} />
         </CustomBottomSheet>
       </SafeAreaView>
     </GestureHandlerRootView>
