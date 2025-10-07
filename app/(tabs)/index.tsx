@@ -253,7 +253,7 @@ export default function Index() {
           snapPoints={["90%"]}
           bottomInset={bottomBarHeight}
         >
-          <EditTimeOfBooking />
+          <EditTimeOfBooking setIsEditBookingOpen={setIsEditBookingOpen} />
         </CustomBottomSheet>
       </SafeAreaView>
     </GestureHandlerRootView>

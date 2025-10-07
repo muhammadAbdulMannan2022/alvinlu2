@@ -1,9 +1,9 @@
-import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
-import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Entypo, Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Calendar } from "react-native-calendars";
 
-const EditTimeOfBooking: React.FC = () => {
+const EditTimeOfBooking = ({ setIsEditBookingOpen }: any) => {
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<string>("");
   const [addOns, setAddOns] = useState<string[]>([]);
@@ -104,6 +104,7 @@ const EditTimeOfBooking: React.FC = () => {
       />
       <Text style={{ fontSize: 18, fontWeight: "bold" }}>Add-ons</Text>
       <View
+        className="gap-2"
         style={{
           flexDirection: "row",
           alignItems: "center",
@@ -111,6 +112,7 @@ const EditTimeOfBooking: React.FC = () => {
         }}
       >
         <TextInput
+          className="line-clamp-1"
           style={{
             flex: 1,
             borderWidth: 1,
@@ -122,7 +124,13 @@ const EditTimeOfBooking: React.FC = () => {
           onChangeText={setNewAddOn}
           placeholder="Enter add-on"
         />
-        <Button title="Add" onPress={handleAddAddOn} />
+        <TouchableOpacity
+          onPress={() => handleAddAddOn()}
+          className="flex-row items-center justify-center px-4 py-2 gap-3 border  bg-black"
+          style={{ borderColor: "#00000040", borderRadius: 10 }}
+        >
+          <Entypo name="plus" size={24} color="#ffffff" />
+        </TouchableOpacity>
       </View>
       {addOns.map((item, index) => (
         <View
@@ -131,6 +139,10 @@ const EditTimeOfBooking: React.FC = () => {
             flexDirection: "row",
             alignItems: "center",
             marginVertical: 5,
+            borderWidth: 1,
+            borderColor: "#ccc",
+            padding: 10,
+            borderRadius: 5,
           }}
         >
           <Text style={{ flex: 1 }}>{item}</Text>
@@ -139,15 +151,25 @@ const EditTimeOfBooking: React.FC = () => {
           </TouchableOpacity>
         </View>
       ))}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          marginTop: 20,
-        }}
-      >
-        <Button title="Cancel" color="gray" />
-        <Button title="Save Changes" color="#000" />
+      <View className="flex-row gap-4 mt-4 mb-20">
+        <TouchableOpacity
+          onPress={() => {
+            setIsEditBookingOpen();
+          }}
+          className="flex-row items-center justify-center px-4 py-2 gap-3 border flex-1"
+          style={{ borderColor: "#00000040", borderRadius: 10 }}
+        >
+          <Text className="text-base font-bold">cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setIsEditBookingOpen();
+          }}
+          className="flex-row items-center justify-center px-4 py-2 gap-3 border flex-1 bg-black"
+          style={{ borderColor: "#00000040", borderRadius: 10 }}
+        >
+          <Text className="text-base font-bold text-white">Save Changes</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
