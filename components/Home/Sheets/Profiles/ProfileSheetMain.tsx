@@ -7,7 +7,7 @@ import Wallet from "./Wallet";
 
 export default function ProfileSheetMain() {
   // top parts
-  const [isProfileActive, setProfileActive] = useState(false);
+  const [isProfileActive, setProfileActive] = useState(true); // Set profile active by default
   const [isCalendarActive, setCalendarActive] = useState(false);
   const [isWalletActive, setWalletActive] = useState(false);
 
@@ -17,6 +17,7 @@ export default function ProfileSheetMain() {
     setWalletActive(icon === "wallet" ? !isWalletActive : false);
     // Add navigation logic here based on icon
   };
+
   return (
     <View>
       <Text className="text-lg lg:text-xl mb-5 font-bold">Member Profile</Text>
@@ -26,7 +27,7 @@ export default function ProfileSheetMain() {
       >
         <TouchableOpacity
           onPress={() => toggleIcon("profile")}
-          className={`w-1/3 items-center ${isProfileActive && "bg-white   py-2"}`}
+          className={`w-1/3 items-center ${isProfileActive && "bg-white py-2"}`}
           style={{ borderRadius: 15 }}
         >
           <Ionicons
@@ -37,7 +38,7 @@ export default function ProfileSheetMain() {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => toggleIcon("calendar")}
-          className={`w-1/3 items-center ${isCalendarActive && "bg-white   py-2"}`}
+          className={`w-1/3 items-center ${isCalendarActive && "bg-white py-2"}`}
           style={{ borderRadius: 15 }}
         >
           <Ionicons
@@ -48,7 +49,7 @@ export default function ProfileSheetMain() {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => toggleIcon("wallet")}
-          className={`w-1/3 items-center ${isWalletActive && "bg-white   py-2"}`}
+          className={`w-1/3 items-center ${isWalletActive && "bg-white py-2"}`}
           style={{ borderRadius: 15 }}
         >
           <Ionicons

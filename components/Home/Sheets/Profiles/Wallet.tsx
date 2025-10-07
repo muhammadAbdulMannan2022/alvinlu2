@@ -1,8 +1,11 @@
+import { ModalContext } from "@/app/(tabs)";
 import { Entypo, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { useContext } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
 export default function Wallet() {
+  const { setIsCraditModalOpen, setIsAddingCredit } = useContext(ModalContext);
   return (
     <View className="py-10">
       <View className="flex-row items-center mb-4">
@@ -13,15 +16,21 @@ export default function Wallet() {
       </View>
       <View className="flex-row gap-4 mt-4 ">
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => {
+            setIsCraditModalOpen();
+            setIsAddingCredit(true);
+          }}
           className="flex-row items-center justify-center px-4 py-2 gap-3 border flex-1 bg-black"
           style={{ borderColor: "#00000040", borderRadius: 10 }}
         >
           <Entypo name="plus" size={24} color="#ffffff" />
-          <Text className="text-base font-bold text-white">Save Changes</Text>
+          <Text className="text-base font-bold text-white">Add Credit</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => {
+            setIsCraditModalOpen();
+            setIsAddingCredit(false);
+          }}
           className="flex-row items-center justify-center px-4 py-2 gap-3 border flex-1"
           style={{ borderColor: "#00000040", borderRadius: 10 }}
         >

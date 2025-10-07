@@ -83,7 +83,7 @@ export default function Sheet1({
         </View>
 
         {/* Booking Information */}
-        <View className="mt-5 px-4">
+        <View className="mt-5 ">
           <View className="flex-row justify-between items-center">
             <Text className="text-lg font-bold">Booking Information</Text>
             <TouchableOpacity
@@ -97,13 +97,13 @@ export default function Sheet1({
           <View className="mt-5">
             <LinearGradient
               colors={["#EFF6FF", "#FAF5FF"]}
-              className="border-2 flex-row justify-between items-center px-4 py-4"
+              className="border-2 flex-row justify-between items-center px-6 py-4"
               style={{ borderColor: "#BEDBFF", borderRadius: 10 }}
             >
               <View className="flex-row items-center gap-4">
                 <Image
                   source={{ uri: data.client.img }}
-                  className="h-10 w-10"
+                  className="h-12 w-12"
                 />
                 <View>
                   <Text className="text-lg md:text-xl font-bold">

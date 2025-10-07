@@ -5,12 +5,17 @@ import PaymentComplete from "@/components/Home/Sheets/PaymentComplete";
 import ProfileSheetMain from "@/components/Home/Sheets/Profiles/ProfileSheetMain";
 import Sheet1 from "@/components/Home/Sheets/Sheet1";
 import TopPart from "@/components/Home/TopPart";
+import AddStoreCradittModal from "@/components/Modals/CreditModal";
+import ModalComponent from "@/components/Modals/ReuseableModals";
 import CustomBottomSheet from "@/components/ReuseableBottomSheets/CustomBottomSheet";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import { FlatList, ScrollView, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+// 1️⃣ create the context
+export const ModalContext = createContext<any>(null);
 
 export default function Index() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -130,6 +135,11 @@ export default function Index() {
       end_time: "2:30 PM",
     },
   ]);
+
+  // modal
+  const [isCraditModalOpen, setIsCraditModalOpen] = useState(false);
+  const [isAddingCredit, setIsAddingCredit] = useState(false);
+  //
   const snapPoints = ["90%"];
   const today = new Date("2025-10-04").toISOString().split("T")[0];
   const tomorrow = new Date("2025-10-05").toISOString().split("T")[0];
@@ -144,130 +154,150 @@ export default function Index() {
   };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaView
-        className="flex-1 bg-white"
-        style={{ paddingBottom: bottomBarHeight - 25 }}
-      >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <View className="px-4 bg-white">
-            <TopPart />
-          </View>
+    <ModalContext.Provider
+      value={{
+        isCraditModalOpen,
+        setIsCraditModalOpen,
+        isAddingCredit,
+        setIsAddingCredit,
+      }}
+    >
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <SafeAreaView
+          className="flex-1 bg-white"
+          style={{ paddingBottom: bottomBarHeight - 25 }}
+        >
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <View className="px-4 bg-white">
+              <TopPart />
+            </View>
 
-          {/* Today's bookings */}
-          <View className="mt-4">
-            <Text className="text-xl md:text-3xl font-bold px-4">
-              Today's Bookings
-            </Text>
-            <FlatList
-              data={todaysBookings}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <BookingsCard setItemSheetOpen={openSheet1} {...item} />
-              )}
-              keyExtractor={(item) => item.id.toString()}
-              contentContainerStyle={{
-                paddingVertical: 8,
-                gap: 10,
-                paddingHorizontal: 10,
-              }}
-            />
-          </View>
+            {/* Today's bookings */}
+            <View className="mt-4">
+              <Text className="text-xl md:text-3xl font-bold px-4">
+                Today's Bookings
+              </Text>
+              <FlatList
+                data={todaysBookings}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <BookingsCard setItemSheetOpen={openSheet1} {...item} />
+                )}
+                keyExtractor={(item) => item.id.toString()}
+                contentContainerStyle={{
+                  paddingVertical: 8,
+                  gap: 10,
+                  paddingHorizontal: 10,
+                }}
+              />
+            </View>
 
-          {/* Tomorrow's Bookings */}
-          <View className="mt-4">
-            <Text className="text-xl md:text-3xl font-bold px-4">
-              Tomorrow's Bookings
-            </Text>
-            <FlatList
-              data={tomorrowsBookings}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <BookingsCard setItemSheetOpen={openSheet1} {...item} />
-              )}
-              keyExtractor={(item) => item.id.toString()}
-              contentContainerStyle={{
-                paddingVertical: 8,
-                gap: 10,
-                paddingHorizontal: 10,
-              }}
-            />
-          </View>
+            {/* Tomorrow's Bookings */}
+            <View className="mt-4">
+              <Text className="text-xl md:text-3xl font-bold px-4">
+                Tomorrow's Bookings
+              </Text>
+              <FlatList
+                data={tomorrowsBookings}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <BookingsCard setItemSheetOpen={openSheet1} {...item} />
+                )}
+                keyExtractor={(item) => item.id.toString()}
+                contentContainerStyle={{
+                  paddingVertical: 8,
+                  gap: 10,
+                  paddingHorizontal: 10,
+                }}
+              />
+            </View>
 
-          {/* Next Bookings */}
-          <View className="mt-4">
-            <Text className="text-xl md:text-3xl font-bold px-4">
-              Next Bookings
-            </Text>
-            <FlatList
-              data={nextBookings}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <BookingsCard setItemSheetOpen={openSheet1} {...item} />
-              )}
-              keyExtractor={(item) => item.id.toString()}
-              contentContainerStyle={{
-                paddingVertical: 8,
-                gap: 10,
-                paddingHorizontal: 10,
-              }}
+            {/* Next Bookings */}
+            <View className="mt-4">
+              <Text className="text-xl md:text-3xl font-bold px-4">
+                Next Bookings
+              </Text>
+              <FlatList
+                data={nextBookings}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <BookingsCard setItemSheetOpen={openSheet1} {...item} />
+                )}
+                keyExtractor={(item) => item.id.toString()}
+                contentContainerStyle={{
+                  paddingVertical: 8,
+                  gap: 10,
+                  paddingHorizontal: 10,
+                }}
+              />
+            </View>
+          </ScrollView>
+          {/* sheet 1 */}
+          <CustomBottomSheet
+            isOpen={isOpen}
+            onChange={setIsOpen}
+            snapPoints={snapPoints}
+            // bottomInset={bottomBarHeight}
+          >
+            <Sheet1
+              setIsOpen={setIsOpen}
+              openLate={setIsLateOpen}
+              setIsPaymentOpen={setIsPaymentOpen}
+              setIsEditBookingOpen={setIsEditBookingOpen}
+              setIsProfileOpen={setIsProfileOpen}
             />
-          </View>
-        </ScrollView>
-        {/* sheet 1 */}
-        <CustomBottomSheet
-          isOpen={isOpen}
-          onChange={setIsOpen}
-          snapPoints={snapPoints}
-          // bottomInset={bottomBarHeight}
-        >
-          <Sheet1
-            setIsOpen={setIsOpen}
-            openLate={setIsLateOpen}
-            setIsPaymentOpen={setIsPaymentOpen}
-            setIsEditBookingOpen={setIsEditBookingOpen}
-            setIsProfileOpen={setIsProfileOpen}
-          />
-        </CustomBottomSheet>
-        {/* sheet 2 for late late */}
-        <CustomBottomSheet
-          isOpen={isLateOpen}
-          onChange={setIsLateOpen}
-          snapPoints={["50%"]}
-          bottomInset={bottomBarHeight}
-        >
-          <LateSheet setIsLateOpen={setIsLateOpen} />
-        </CustomBottomSheet>
-        {/* payment sheet */}
-        <CustomBottomSheet
-          isOpen={isPaymentOpen}
-          onChange={setIsPaymentOpen}
-          snapPoints={["90%"]}
-          bottomInset={bottomBarHeight}
-        >
-          <PaymentComplete setIsPaymentOpen={setIsPaymentOpen} />
-        </CustomBottomSheet>
-        <CustomBottomSheet
-          isOpen={isEditBookingOpen}
-          onChange={setIsEditBookingOpen}
-          snapPoints={["90%"]}
-          bottomInset={bottomBarHeight}
-        >
-          <EditTimeOfBooking setIsEditBookingOpen={setIsEditBookingOpen} />
-        </CustomBottomSheet>
-        {/* profile sheet */}
-        <CustomBottomSheet
-          isOpen={isProfileOpen}
-          onChange={setIsProfileOpen}
-          snapPoints={["90%"]}
-          bottomInset={bottomBarHeight}
-        >
-          <ProfileSheetMain />
-        </CustomBottomSheet>
-      </SafeAreaView>
-    </GestureHandlerRootView>
+          </CustomBottomSheet>
+          {/* sheet 2 for late late */}
+          <CustomBottomSheet
+            isOpen={isLateOpen}
+            onChange={setIsLateOpen}
+            snapPoints={["50%"]}
+            bottomInset={bottomBarHeight}
+          >
+            <LateSheet setIsLateOpen={setIsLateOpen} />
+          </CustomBottomSheet>
+          {/* payment sheet */}
+          <CustomBottomSheet
+            isOpen={isPaymentOpen}
+            onChange={setIsPaymentOpen}
+            snapPoints={["90%"]}
+            bottomInset={bottomBarHeight}
+          >
+            <PaymentComplete setIsPaymentOpen={setIsPaymentOpen} />
+          </CustomBottomSheet>
+          <CustomBottomSheet
+            isOpen={isEditBookingOpen}
+            onChange={setIsEditBookingOpen}
+            snapPoints={["90%"]}
+            bottomInset={bottomBarHeight}
+          >
+            <EditTimeOfBooking setIsEditBookingOpen={setIsEditBookingOpen} />
+          </CustomBottomSheet>
+          {/* profile sheet */}
+          <CustomBottomSheet
+            isOpen={isProfileOpen}
+            onChange={setIsProfileOpen}
+            snapPoints={["90%"]}
+            bottomInset={bottomBarHeight}
+          >
+            <ProfileSheetMain />
+          </CustomBottomSheet>
+          {/* modals */}
+          {/* credit modal */}
+          <ModalComponent
+            visible={isCraditModalOpen}
+            onClose={() => setIsCraditModalOpen(false)}
+          >
+            <AddStoreCradittModal
+              visible={isCraditModalOpen}
+              onClose={() => setIsCraditModalOpen(false)}
+            />
+          </ModalComponent>
+        </SafeAreaView>
+      </GestureHandlerRootView>
+    </ModalContext.Provider>
   );
 }
