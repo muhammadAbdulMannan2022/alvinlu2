@@ -18,6 +18,7 @@ export default function Sheet1({
   setIsOpen,
   setIsPaymentOpen,
   setIsEditBookingOpen,
+  setIsProfileOpen,
 }: any) {
   const [showOption, setShowOption] = useState(true);
   const [data] = useState({
@@ -117,6 +118,7 @@ export default function Sheet1({
                 </View>
               </View>
               <TouchableOpacity
+                onPress={() => setIsProfileOpen(true)}
                 className="border p-2 bg-white"
                 style={{ borderColor: "#00000030", borderRadius: 10 }}
               >

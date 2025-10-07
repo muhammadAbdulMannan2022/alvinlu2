@@ -2,6 +2,7 @@ import BookingsCard from "@/components/Home/BookingsCard";
 import EditTimeOfBooking from "@/components/Home/Sheets/EditTiime";
 import LateSheet from "@/components/Home/Sheets/LateSheet";
 import PaymentComplete from "@/components/Home/Sheets/PaymentComplete";
+import ProfileSheetMain from "@/components/Home/Sheets/Profiles/ProfileSheetMain";
 import Sheet1 from "@/components/Home/Sheets/Sheet1";
 import TopPart from "@/components/Home/TopPart";
 import CustomBottomSheet from "@/components/ReuseableBottomSheets/CustomBottomSheet";
@@ -16,6 +17,7 @@ export default function Index() {
   const [isLateOpen, setIsLateOpen] = useState<boolean>(false);
   const [isPaymentOpen, setIsPaymentOpen] = useState<boolean>(false);
   const [isEditBookingOpen, setIsEditBookingOpen] = useState<boolean>(false);
+  const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
   const [data, setData] = useState([
     {
       id: 1,
@@ -227,6 +229,7 @@ export default function Index() {
             openLate={setIsLateOpen}
             setIsPaymentOpen={setIsPaymentOpen}
             setIsEditBookingOpen={setIsEditBookingOpen}
+            setIsProfileOpen={setIsProfileOpen}
           />
         </CustomBottomSheet>
         {/* sheet 2 for late late */}
@@ -254,6 +257,15 @@ export default function Index() {
           bottomInset={bottomBarHeight}
         >
           <EditTimeOfBooking setIsEditBookingOpen={setIsEditBookingOpen} />
+        </CustomBottomSheet>
+        {/* profile sheet */}
+        <CustomBottomSheet
+          isOpen={isProfileOpen}
+          onChange={setIsProfileOpen}
+          snapPoints={["90%"]}
+          bottomInset={bottomBarHeight}
+        >
+          <ProfileSheetMain />
         </CustomBottomSheet>
       </SafeAreaView>
     </GestureHandlerRootView>
