@@ -1,7 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
+import BookingHistory from "./BookingsHistory";
 import Profile from "./Profile";
+import Wallet from "./Wallet";
 
 export default function ProfileSheetMain() {
   // top parts
@@ -58,6 +60,8 @@ export default function ProfileSheetMain() {
       </View>
       {/* profile */}
       {isProfileActive && <Profile />}
+      {isCalendarActive && <BookingHistory />}
+      {isWalletActive && <Wallet />}
     </View>
   );
 }
