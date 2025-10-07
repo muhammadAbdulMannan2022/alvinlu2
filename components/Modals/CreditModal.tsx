@@ -22,7 +22,7 @@ export default function AddStoreCradittModal({
   const { setIsCraditModalOpen, isAddingCredit, setIsAddingCredit } =
     useContext(ModalContext);
   //
-  const [amount, setAmount] = useState("0");
+  const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -47,7 +47,7 @@ export default function AddStoreCradittModal({
 
   const handleAmountChange = (text: string) => {
     const numericValue = text.replace(/[^0-9]/g, "");
-    setAmount(numericValue || "0");
+    setAmount(numericValue || "");
   };
 
   const handleAddCredit = () => {
@@ -73,21 +73,17 @@ export default function AddStoreCradittModal({
       </View>
 
       {/* Credit Amount */}
-      <View className="mb-5">
-        <Text className="text-base font-semibold mb-2">Credit Amount</Text>
-        <View className="bg-gray-50 rounded-lg border border-gray-200 p-4">
-          <Text className="text-3xl font-semibold">{amount}¥</Text>
-          <Text className="text-gray-400 text-sm mt-1">
-            Enter the amount of store credit to add
-          </Text>
-        </View>
+      <View className="bg-gray-50 rounded-lg border border-gray-200 p-4">
         <TextInput
-          ref={inputRef}
-          className="absolute opacity-0"
+          className="text-3xl font-semibold"
           keyboardType="numeric"
           value={amount}
+          onBlur={() => setAmount(amount + "¥")}
           onChangeText={handleAmountChange}
         />
+        <Text className="text-gray-400 text-sm mt-1">
+          Enter the amount of store credit to add
+        </Text>
       </View>
 
       {/* Description */}
@@ -145,18 +141,14 @@ export default function AddStoreCradittModal({
             onPress={handleAddCredit}
             className="flex-1 bg-gray-700 rounded-lg py-3 items-center"
           >
-            <Text className="text-base font-semibold text-white">
-              Add Credit
-            </Text>
+            <Text className="text-base font-semibold text-white">Confirm</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
             onPress={handleAddCredit}
             className="flex-1 bg-gray-700 rounded-lg py-3 items-center"
           >
-            <Text className="text-base font-semibold text-white">
-              Deduct Credit
-            </Text>
+            <Text className="text-base font-semibold text-white">Confirm</Text>
           </TouchableOpacity>
         )}
       </View>
