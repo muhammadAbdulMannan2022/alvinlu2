@@ -1,4 +1,4 @@
-import { ModalContext } from "@/app/(tabs)";
+import { ModalContext } from "@/app/_layout";
 import { Entypo, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useContext } from "react";

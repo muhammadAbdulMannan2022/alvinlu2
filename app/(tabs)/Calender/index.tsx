@@ -1,9 +1,17 @@
+import EditTimeOfBooking from "@/components/Home/Sheets/EditTiime";
+import LateSheet from "@/components/Home/Sheets/LateSheet";
+import PaymentComplete from "@/components/Home/Sheets/PaymentComplete";
+import ProfileSheetMain from "@/components/Home/Sheets/Profiles/ProfileSheetMain";
+import Sheet1 from "@/components/Home/Sheets/Sheet1";
+import CustomBottomSheet from "@/components/ReuseableBottomSheets/CustomBottomSheet";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import React, { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Calendar, CalendarProps } from "react-native-calendars";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Items from "./Items";
 
 // Define interfaces for type safety
 interface Booking {
@@ -30,6 +38,18 @@ interface DayComponentProps {
 }
 
 export default function BookingCalendar() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isLateOpen, setIsLateOpen] = useState<boolean>(false);
+  const [isPaymentOpen, setIsPaymentOpen] = useState<boolean>(false);
+  const [isEditBookingOpen, setIsEditBookingOpen] = useState<boolean>(false);
+  const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
+
+  const openSheet1 = (id: string | number) => {
+    setIsOpen(true);
+    console.log(id);
+  };
+
+  // sheets state
   const [currentDate, setCurrentDate] = useState<string>("2025-09-01");
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const bottomBarHeight = useBottomTabBarHeight();
@@ -276,117 +296,173 @@ export default function BookingCalendar() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-white">
-      <SafeAreaView
-        className="px-4"
-        style={{ marginBottom: bottomBarHeight + 70 }}
-      >
-        <View className="flex-row items-center justify-between mb-5">
-          <Text className="text-xl lg:text-2xl font-bold">Calendar</Text>
-          <TouchableOpacity
-            className="flex-row items-center gap-3 border px-2 py-1.5"
-            style={{ borderColor: "#00000030", borderRadius: 8 }}
-          >
-            <Entypo name="plus" size={24} color="black" />
-            <Text className="font-semibold">New Booking</Text>
-          </TouchableOpacity>
-        </View>
-        {/* calender controles */}
-        <View className="">
-          {/* Custom header with navigation */}
-          <View className="flex-row items-center justify-between mb-6">
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ScrollView className="flex-1 bg-white">
+        <SafeAreaView
+          className="px-4"
+          style={{ marginBottom: bottomBarHeight + 70 }}
+        >
+          <View className="flex-row items-center justify-between mb-5">
+            <Text className="text-xl lg:text-2xl font-bold">Calendar</Text>
             <TouchableOpacity
-              onPress={handlePrevMonth}
-              className="w-10 h-10 items-center justify-center"
+              className="flex-row items-center gap-3 border px-2 py-1.5"
+              style={{ borderColor: "#00000030", borderRadius: 8 }}
             >
-              <Ionicons name="chevron-back" size={24} color="#000" />
-            </TouchableOpacity>
-
-            <Text className="text-xl font-semibold">
-              {getMonthYear(currentDate)}
-            </Text>
-
-            <TouchableOpacity
-              onPress={handleNextMonth}
-              className="w-10 h-10 items-center justify-center"
-            >
-              <Ionicons name="chevron-forward" size={24} color="#000" />
+              <Entypo name="plus" size={24} color="black" />
+              <Text className="font-semibold">New Booking</Text>
             </TouchableOpacity>
           </View>
-
-          {/* Stats cards */}
-          <View className="flex-row mb-6 gap-3">
-            {stats.map((stat, index) => (
-              <View
-                key={index}
-                className="flex-1 bg-gray-50 rounded-2xl p-4 items-center"
+          {/* calender controles */}
+          <View className="">
+            {/* Custom header with navigation */}
+            <View className="flex-row items-center justify-between mb-6">
+              <TouchableOpacity
+                onPress={handlePrevMonth}
+                className="w-10 h-10 items-center justify-center"
               >
-                <Text className="text-2xl font-bold text-black mb-1">
-                  {stat.value}
-                </Text>
-                <Text className="text-xs text-gray-500 text-center">
-                  {stat.label}
-                </Text>
-              </View>
-            ))}
-          </View>
+                <Ionicons name="chevron-back" size={24} color="#000" />
+              </TouchableOpacity>
 
-          {/* Calendar */}
-          <View className="bg-white rounded-2xl overflow-hidden border border-gray-100">
-            <Calendar
-              key={currentDate}
-              current={currentDate}
-              monthFormat={"yyyy-MM"}
-              onDayPress={handleDayPress}
-              markedDates={markedDates}
-              theme={{
-                backgroundColor: "#ffffff",
-                calendarBackground: "#ffffff",
-                textSectionTitleColor: "#000000",
-                selectedDayBackgroundColor: "#000000",
-                selectedDayTextColor: "#ffffff",
-                todayTextColor: "#ffffff",
-                todayBackgroundColor: "#4F46E5",
-                dayTextColor: "#000000",
-                textDisabledColor: "#D1D5DB",
-                monthTextColor: "#000000",
-                textMonthFontWeight: "600",
-                textDayFontSize: 16,
-                textMonthFontSize: 18,
-                textDayHeaderFontSize: 13,
-                "stylesheet.calendar.header": {
-                  header: {
-                    height: 0, // Hide default header
-                    opacity: 0,
+              <Text className="text-xl font-semibold">
+                {getMonthYear(currentDate)}
+              </Text>
+
+              <TouchableOpacity
+                onPress={handleNextMonth}
+                className="w-10 h-10 items-center justify-center"
+              >
+                <Ionicons name="chevron-forward" size={24} color="#000" />
+              </TouchableOpacity>
+            </View>
+
+            {/* Stats cards */}
+            <View className="flex-row mb-6 gap-3">
+              {stats.map((stat, index) => (
+                <View
+                  key={index}
+                  className="flex-1 bg-gray-50 rounded-2xl p-4 items-center"
+                >
+                  <Text className="text-2xl font-bold text-black mb-1">
+                    {stat.value}
+                  </Text>
+                  <Text className="text-xs text-gray-500 text-center">
+                    {stat.label}
+                  </Text>
+                </View>
+              ))}
+            </View>
+
+            {/* Calendar */}
+            <View className="bg-white rounded-2xl overflow-hidden border border-gray-100 min-h-[400px]">
+              <Calendar
+                key={currentDate}
+                current={currentDate}
+                monthFormat={"yyyy-MM"}
+                onDayPress={handleDayPress}
+                markedDates={markedDates}
+                theme={{
+                  backgroundColor: "#ffffff",
+                  calendarBackground: "#ffffff",
+                  textSectionTitleColor: "#000000",
+                  selectedDayBackgroundColor: "#000000",
+                  selectedDayTextColor: "#ffffff",
+                  todayTextColor: "#ffffff",
+                  todayBackgroundColor: "#4F46E5",
+                  dayTextColor: "#000000",
+                  textDisabledColor: "#D1D5DB",
+                  monthTextColor: "#000000",
+                  textMonthFontWeight: "600",
+                  textDayFontSize: 16,
+                  textMonthFontSize: 18,
+                  textDayHeaderFontSize: 13,
+                  "stylesheet.calendar.header": {
+                    header: {
+                      height: 0, // Hide default header
+                      opacity: 0,
+                    },
+                    week: {
+                      marginTop: 5,
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                      backgroundColor: "#F9FAFB",
+                      color: "#000000",
+                      borderRadius: 12,
+                      padding: 8,
+                    },
                   },
-                  week: {
-                    marginTop: 5,
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                    backgroundColor: "#F9FAFB",
-                    color: "#000000",
-                    borderRadius: 12,
-                    padding: 8,
-                  },
-                },
-              }}
-              dayComponent={DayComponent}
-              enableSwipeMonths={true}
-              hideArrows={true}
-              hideExtraDays={false}
-              style={{
-                paddingBottom: 10,
-              }}
-              onMonthChange={(month) => {
-                setCurrentDate(
-                  `${month.year}-${month.month.toString().padStart(2, "0")}-01`
-                );
-              }}
-            />
+                }}
+                dayComponent={DayComponent}
+                enableSwipeMonths={true}
+                hideArrows={true}
+                hideExtraDays={false}
+                style={{
+                  paddingBottom: 10,
+                }}
+                onMonthChange={(month) => {
+                  setCurrentDate(
+                    `${month.year}-${month.month.toString().padStart(2, "0")}-01`
+                  );
+                }}
+              />
+            </View>
           </View>
-        </View>
-        {/* items */}
-      </SafeAreaView>
-    </ScrollView>
+          {/* items */}
+          <Items openSheet1={openSheet1} data={data} />
+        </SafeAreaView>
+      </ScrollView>
+      {/* sheets */}
+
+      {/* sheet 1 */}
+      <CustomBottomSheet
+        isOpen={isOpen}
+        onChange={setIsOpen}
+        snapPoints={["90%"]}
+        bottomInset={bottomBarHeight}
+      >
+        <Sheet1
+          setIsOpen={setIsOpen}
+          openLate={setIsLateOpen}
+          setIsPaymentOpen={setIsPaymentOpen}
+          setIsEditBookingOpen={setIsEditBookingOpen}
+          setIsProfileOpen={setIsProfileOpen}
+        />
+      </CustomBottomSheet>
+
+      {/* sheet 2 for late late */}
+      <CustomBottomSheet
+        isOpen={isLateOpen}
+        onChange={setIsLateOpen}
+        snapPoints={["50%"]}
+        bottomInset={bottomBarHeight}
+      >
+        <LateSheet setIsLateOpen={setIsLateOpen} />
+      </CustomBottomSheet>
+      {/* payment sheet */}
+      <CustomBottomSheet
+        isOpen={isPaymentOpen}
+        onChange={setIsPaymentOpen}
+        snapPoints={["90%"]}
+        bottomInset={bottomBarHeight}
+      >
+        <PaymentComplete setIsPaymentOpen={setIsPaymentOpen} />
+      </CustomBottomSheet>
+      <CustomBottomSheet
+        isOpen={isEditBookingOpen}
+        onChange={setIsEditBookingOpen}
+        snapPoints={["90%"]}
+        bottomInset={bottomBarHeight}
+      >
+        <EditTimeOfBooking setIsEditBookingOpen={setIsEditBookingOpen} />
+      </CustomBottomSheet>
+      {/* profile sheet */}
+      <CustomBottomSheet
+        isOpen={isProfileOpen}
+        onChange={setIsProfileOpen}
+        snapPoints={["90%"]}
+        bottomInset={bottomBarHeight}
+      >
+        <ProfileSheetMain />
+      </CustomBottomSheet>
+    </GestureHandlerRootView>
   );
 }

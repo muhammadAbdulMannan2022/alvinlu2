@@ -52,7 +52,7 @@ export default function BookingsCard({
           resizeMode="cover"
         >
           {/* {console.log(service_img)} */}
-          <View className="bg-black/60 h-full w-[300px] p-4">
+          <View className={`bg-black/60 h-full w-full min-w-[300px]  p-4`}>
             <View className="flex-row justify-between">
               <View className="flex-row items-center gap-4">
                 <View className="bg-[#6A7282] px-1.5 py-1 rounded-md">
