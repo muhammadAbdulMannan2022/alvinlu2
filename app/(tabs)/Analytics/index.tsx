@@ -1,9 +1,10 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react"; // Added useEffect
 import { Dimensions, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ChartComponent from "./ChartComponent";
+import DateRangeModal from "./DateRangeModal";
 import TabSelector from "./Services";
 import StatCard from "./StatCard";
 import TabNavigator from "./TabNavigator";
@@ -15,8 +16,39 @@ const screenWidth = Dimensions.get("window").width;
 export default function AnalyticsDashboard() {
   const [activeTab, setActiveTab] = useState("This Year");
   const bottomBarHeight = useBottomTabBarHeight();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedRange, setSelectedRange] = useState({
+    start: new Date(),
+    end: new Date(),
+  });
 
-  const tabs = ["This Month", "Last Month", "Last 3 Months", "This Year"];
+  // Effect to open/close modal based on activeTab
+  useEffect(() => {
+    if (activeTab === "Custom Date") {
+      setModalVisible(true);
+    } else {
+      setModalVisible(false);
+    }
+  }, [activeTab]); // Re-run when activeTab changes
+
+  const handleApply = (start: Date, end: Date) => {
+    setSelectedRange({ start, end });
+    console.log(
+      "Selected range:",
+      start.toDateString(),
+      "to",
+      end.toDateString()
+    );
+    // Do something with the dates, e.g., filter data
+  };
+
+  const tabs = [
+    "This Month",
+    "Last Month",
+    "Last 3 Months",
+    "This Year",
+    "Custom Date",
+  ];
 
   const statsData = [
     {
@@ -163,6 +195,15 @@ export default function AnalyticsDashboard() {
           <TopReturningCustomers />
           {/* new chart */}
           <NewChartComponent />
+
+          {/* Custom Date Modal */}
+          <DateRangeModal
+            visible={modalVisible}
+            onClose={() => setModalVisible(false)}
+            onApply={handleApply}
+            initialStartDate={selectedRange.start}
+            initialEndDate={selectedRange.end}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
