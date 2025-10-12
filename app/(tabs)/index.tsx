@@ -2,6 +2,7 @@ import BookingsCard from "@/components/Home/BookingsCard";
 import EditTimeOfBooking from "@/components/Home/Sheets/EditTiime";
 import LateSheet from "@/components/Home/Sheets/LateSheet";
 import PaymentComplete from "@/components/Home/Sheets/PaymentComplete";
+import Notifications from "@/components/Home/Sheets/Profiles/Notifications";
 import ProfileSheetMain from "@/components/Home/Sheets/Profiles/ProfileSheetMain";
 import Sheet1 from "@/components/Home/Sheets/Sheet1";
 import TopPart from "@/components/Home/TopPart";
@@ -21,6 +22,7 @@ export default function Index() {
   const [isPaymentOpen, setIsPaymentOpen] = useState<boolean>(false);
   const [isEditBookingOpen, setIsEditBookingOpen] = useState<boolean>(false);
   const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState<boolean>(false);
   const [data, setData] = useState([
     {
       id: 1,
@@ -163,7 +165,7 @@ export default function Index() {
       >
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View className="px-4 bg-white">
-            <TopPart />
+            <TopPart setIsNotificationOpen={setIsNotificationOpen} />
           </View>
 
           {/* Today's bookings */}
@@ -278,6 +280,18 @@ export default function Index() {
           bottomInset={bottomBarHeight}
         >
           <ProfileSheetMain />
+        </CustomBottomSheet>
+        {/* notification */}
+        <CustomBottomSheet
+          isOpen={isNotificationOpen}
+          onChange={setIsNotificationOpen}
+          snapPoints={["90%"]}
+          bottomInset={bottomBarHeight}
+        >
+          <Notifications
+            setItemSheetOpen={openSheet1}
+            setIsNotificationOpen={setIsNotificationOpen}
+          />
         </CustomBottomSheet>
         {/* modals */}
         {/* credit modal */}

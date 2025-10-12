@@ -1,7 +1,7 @@
 import { Feather } from "@expo/vector-icons";
 import { Text, TouchableOpacity, View } from "react-native";
 
-export default function TopPart() {
+export default function TopPart({ setIsNotificationOpen }: any) {
   return (
     <View>
       <View className="flex-row items-center justify-between py-1">
@@ -13,7 +13,7 @@ export default function TopPart() {
             Saturday, September 6, 2025
           </Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setIsNotificationOpen(true)}>
           <View className="relative bg-[#E9EBEF] p-3 rounded-md">
             <Feather name="bell" size={24} color="#030213" />
             <View className="w-3 md:w-3.h-3.5 h-3 md:h-3.5 bg-[#D4183D] rounded-full absolute -right-1 -top-1" />
