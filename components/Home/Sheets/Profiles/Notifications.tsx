@@ -139,13 +139,13 @@ export default function Notifications({
       </View>
       {notificationsData.map((notification) => (
         <TouchableOpacity
+          key={notification.id}
           onPress={() => {
             setItemSheetOpen(true);
             setIsNotificationOpen(false);
           }}
         >
           <View
-            key={notification.id}
             className="flex-row bg-white rounded-xl p-4 mb-3 shadow-sm"
             style={shadowStyle}
           >
