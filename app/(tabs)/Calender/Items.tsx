@@ -32,7 +32,6 @@ export default function Items({ data, selectedDate, openSheet1 }: ItemsProps) {
   // Open sheet 1
 
   return (
-    // <GestureHandlerRootView style={{ flex: 1 }}>
     <SafeAreaView style={{ flex: 1 }}>
       <Text className="text-lg font-semibold mb-4">Today's Schedule</Text>
       {data.length > 0 ? (
@@ -47,6 +46,5 @@ export default function Items({ data, selectedDate, openSheet1 }: ItemsProps) {
         </Text>
       )}
     </SafeAreaView>
-    // </GestureHandlerRootView>
   );
 }
