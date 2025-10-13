@@ -272,7 +272,7 @@ const TeamManagement: React.FC = () => {
             <TouchableOpacity
               onPress={() => {
                 setMenuVisible(false);
-                // Handle commission adjustment
+                router.push("/(tabs)/Management/screens/CommissionAdjustment");
               }}
               className="flex-row items-center px-4 py-3 border-b border-gray-100"
             >
