@@ -93,7 +93,13 @@ const Index: React.FC = () => {
             >
               {/* Business Setup Section */}
               <SectionHeader title="BUSINESS SETUP" />
-              <MenuItem icon="briefcase" title="Business Setup" />
+              <MenuItem
+                onPress={() =>
+                  router.push("/(tabs)/Management/screens/BusinessSetup")
+                }
+                icon="briefcase"
+                title="Business Setup"
+              />
               <MenuItem icon="file-text" title="Service Menu & Pricing" />
               <MenuItem icon="clock" title="Business Hours" />
               <MenuItem icon="users" title="Customer Management" />
