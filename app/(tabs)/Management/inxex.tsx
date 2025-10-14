@@ -101,7 +101,13 @@ const Index: React.FC = () => {
                 title="Business Setup"
               />
               <MenuItem icon="file-text" title="Service Menu & Pricing" />
-              <MenuItem icon="clock" title="Business Hours" />
+              <MenuItem
+                onPress={() =>
+                  router.push("/(tabs)/Management/screens/BusinessHours")
+                }
+                icon="clock"
+                title="Business Hours"
+              />
               <MenuItem icon="users" title="Customer Management" />
               <MenuItem icon="slash" title="Block List" />
             </View>
