@@ -14,6 +14,26 @@ import {
 import { Calendar } from "react-native-calendars";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// Define interfaces for type safety
+interface Booking {
+  time: string;
+  id: number;
+  note?: string;
+}
+interface BookingData {
+  [date: string]: Booking[];
+}
+interface DayComponentProps {
+  date: {
+    dateString: string;
+    day: number;
+    month: number;
+    year: number;
+    timestamp: number;
+  };
+  state: "disabled" | "today" | "selected" | "";
+}
+
 export default function BusinessHours() {
   const router = useRouter();
   const bottomBarHeight = useBottomTabBarHeight();
@@ -24,12 +44,44 @@ export default function BusinessHours() {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [datePickerValue, setDatePickerValue] = useState(new Date());
 
-  const markedDates = {
-    "2025-09-03": { marked: true, dotColor: "#000" },
-    "2025-09-10": { marked: true, dotColor: "#000" },
-    "2025-09-17": { marked: true, dotColor: "#000" },
-    "2025-09-24": { marked: true, dotColor: "#000" },
+  // Sample booking data
+  const bookingData: BookingData = {
+    "2025-09-03": [
+      { time: "09:00", id: 1 },
+      { time: "11:00", id: 2 },
+      { time: "14:00", id: 3 },
+      { time: "14:00", id: 4 },
+      { time: "14:00", id: 5 },
+      { time: "14:00", id: 6 },
+      { time: "14:00", id: 7 },
+      { time: "14:00", id: 8 },
+      { time: "14:00", id: 9 },
+      { time: "14:00", id: 10 },
+    ],
+    "2025-09-10": [
+      { time: "10:00", id: 4 },
+      { time: "13:00", id: 5 },
+      { time: "15:30", id: 6 },
+    ],
+    "2025-09-17": [
+      { time: "12:00", id: 7 },
+      { time: "16:00", id: 8 },
+    ],
+    "2025-09-24": [
+      { time: "09:30", id: 9 },
+      { time: "14:30", id: 10 },
+    ],
   };
+
+  // Create marked dates object
+  //   @ts-ignore
+  const markedDates: CalendarProps["markedDates"] = {};
+  Object.keys(bookingData).forEach((date) => {
+    markedDates[date] = {
+      marked: true,
+      dotColor: "#000",
+    };
+  });
 
   const handleMonthChange = (direction: any) => {
     setCurrentMonth(
@@ -64,6 +116,74 @@ export default function BusinessHours() {
       setDatePickerValue(selectedDate);
       setAutoOpenDay(selectedDate.getDate().toString());
     }
+  };
+
+  // Custom day component
+  const DayComponent: React.FC<DayComponentProps> = ({ date, state }) => {
+    const dateString = date.dateString;
+    const bookings = bookingData[dateString];
+    const isDisabled = state === "disabled";
+
+    return (
+      <TouchableOpacity
+        onPress={(day) => {
+          console.log(day);
+        }}
+        disabled={isDisabled}
+        className="flex-1 items-center py-1"
+      >
+        <View className="w-8 h-8 items-center justify-center rounded-full">
+          <Text
+            className={`text-base font-medium ${
+              isDisabled ? "text-gray-300" : "text-gray-900"
+            }`}
+          >
+            {date.day}
+          </Text>
+        </View>
+
+        {bookings && bookings.length > 0 && (
+          <View className="mt-1 w-full px-1">
+            {bookings.length > 5
+              ? bookings.slice(0, 5).map((booking) => (
+                  <View
+                    key={booking.id}
+                    className="mb-0.5 flex-row items-center gap-1"
+                  >
+                    <Text className="text-xs text-gray-700 text-center">
+                      {booking.time}
+                    </Text>
+                    {booking.note && (
+                      <View className="w-1.5 h-1.5 bg-yellow-300" />
+                    )}
+                  </View>
+                ))
+              : bookings.map((booking) => (
+                  <View
+                    key={booking.id}
+                    className="mb-0.5 flex-row items-center gap-1"
+                  >
+                    <Text className="text-xs text-gray-700 text-center">
+                      {booking.time}
+                    </Text>
+                    {booking.note && (
+                      <View className="w-1.5 h-1.5 bg-yellow-300" />
+                    )}
+                  </View>
+                ))}
+
+            {/* Add "..." if more than 5 */}
+            {bookings.length > 5 && (
+              <Text className="text-sm text-gray-800 text-center">...</Text>
+            )}
+          </View>
+        )}
+
+        {bookings && bookings.length > 0 && (
+          <View className="absolute top-1 right-1 w-1 h-1 rounded-full bg-black" />
+        )}
+      </TouchableOpacity>
+    );
   };
 
   return (
@@ -208,6 +328,8 @@ export default function BusinessHours() {
               hideExtraDays={true}
               firstDay={1}
               renderHeader={() => <View />} // Hide default header
+              //   @ts-ignore
+              dayComponent={DayComponent}
               theme={{
                 backgroundColor: "#ffffff",
                 calendarBackground: "#ffffff",
