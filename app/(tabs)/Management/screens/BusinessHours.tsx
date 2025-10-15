@@ -127,7 +127,7 @@ export default function BusinessHours() {
     return (
       <TouchableOpacity
         onPress={(day) => {
-          console.log(day);
+          router.push("/(tabs)/Management/screens/ScheduleTime");
         }}
         disabled={isDisabled}
         className="flex-1 items-center py-1"
@@ -321,9 +321,6 @@ export default function BusinessHours() {
               key={getCalendarCurrentMonth()} // CRITICAL: Force re-render when month changes
               current={getCalendarCurrentMonth()}
               markedDates={markedDates}
-              onDayPress={(d) => {
-                console.log(d);
-              }}
               hideArrows={true}
               hideExtraDays={true}
               firstDay={1}
@@ -374,8 +371,7 @@ export default function BusinessHours() {
             <TouchableOpacity
               className="flex-row items-center justify-between bg-gray-50 rounded-xl p-4"
               onPress={() => {
-                // Navigate to edit schedule screen
-                // router.push('/edit-schedule')
+                router.push("/(tabs)/Management/screens/ScheduleTime");
               }}
             >
               <Text className="text-base text-gray-500">Edit Schedule</Text>

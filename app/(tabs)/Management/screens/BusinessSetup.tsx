@@ -18,6 +18,8 @@ export default function BusinessSetup() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [notes, setNotes] = useState("");
   const [isEditingNotes, setIsEditingNotes] = useState(false);
+  const [cancellationsNote, setCancellationNote] = useState("");
+  const [isCEditingNotes, setIsCEdingNotes] = useState(false);
   const bottomBarHeight = useBottomTabBarHeight();
 
   const maxNotesLength = 500;
@@ -175,6 +177,86 @@ export default function BusinessSetup() {
                   <View className="absolute bottom-3 right-3">
                     <Text className="text-xs text-gray-400">
                       {notes.length}/{maxNotesLength}
+                    </Text>
+                  </View>
+                )}
+              </View>
+
+              <Text className="text-xs text-gray-500 mt-2">
+                These notes will appear on the booking confirmation page
+              </Text>
+            </View>
+          </View>
+          {/* Cancellations Notes Card */}
+          <View
+            className="bg-white border p-5 mb-6 shadow-sm"
+            style={{ borderColor: "#00000020", borderRadius: 10 }}
+          >
+            <View className="flex-row items-center justify-between mb-3">
+              <View className="flex-row items-center">
+                <Ionicons
+                  name="document-text-outline"
+                  size={24}
+                  color="black"
+                />
+                <Text className="text-base font-semibold text-gray-900 ml-2">
+                  Important Notes
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => setIsCEdingNotes(!isCEditingNotes)}
+              >
+                <Text className="text-blue-500 font-medium">
+                  {isCEditingNotes ? "Done" : "Edit"}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <Text className="text-sm text-gray-500 mb-4">
+              Additional information that customers should know after booking
+            </Text>
+
+            {/* Notes */}
+            <View>
+              <Text className="text-sm font-semibold text-gray-900 mb-2">
+                Notes
+              </Text>
+              <View
+                className={`rounded-xl p-4 relative ${
+                  isCEditingNotes ? "bg-gray-50" : "bg-gray-100"
+                }`}
+              >
+                {isCEditingNotes ? (
+                  <TextInput
+                    value={cancellationsNote}
+                    onChangeText={(text) => {
+                      if (text.length <= maxNotesLength)
+                        setCancellationNote(text);
+                    }}
+                    placeholder="Please arrive 10 minutes early for your appointment. For cancellations, please notify us at least 24 hours in advance. We accept cash and major credit cards. Parking is available in the building basement (B1-B3)."
+                    multiline
+                    numberOfLines={8}
+                    textAlignVertical="top"
+                    className="text-base text-gray-900 min-h-[140px]"
+                    placeholderTextColor="#9ca3af"
+                  />
+                ) : (
+                  <Text
+                    className={`text-base min-h-[140px] ${
+                      cancellationsNote
+                        ? "text-gray-900"
+                        : "text-gray-400 italic"
+                    }`}
+                  >
+                    {cancellationsNote ||
+                      "Please arrive 10 minutes early for your appointment. For cancellations, please notify us at least 24 hours in advance. We accept cash and major credit cards. Parking is available in the building basement (B1-B3)."}
+                  </Text>
+                )}
+
+                {isEditingNotes && (
+                  <View className="absolute bottom-3 right-3">
+                    <Text className="text-xs text-gray-400">
+                      {cancellationsNote.length}/{maxNotesLength}
                     </Text>
                   </View>
                 )}

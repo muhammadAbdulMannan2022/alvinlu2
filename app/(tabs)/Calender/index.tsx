@@ -375,6 +375,7 @@ export default function BookingCalendar() {
                   textDayFontSize: 16,
                   textMonthFontSize: 18,
                   textDayHeaderFontSize: 13,
+                  //@ts-ignore
                   "stylesheet.calendar.header": {
                     header: {
                       height: 0, // Hide default header
@@ -391,6 +392,7 @@ export default function BookingCalendar() {
                     },
                   },
                 }}
+                //@ts-ignore
                 dayComponent={DayComponent}
                 enableSwipeMonths={true}
                 hideArrows={true}
