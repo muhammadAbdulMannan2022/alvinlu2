@@ -1,14 +1,7 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import {
-  Modal,
-  Switch,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 // Define TypeScript interfaces
 interface Category {
@@ -26,55 +19,18 @@ const MenuCategories: React.FC = () => {
   ]);
   const router = useRouter();
 
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [modalMode, setModalMode] = useState<"add" | "edit">("add");
-  const [categoryName, setCategoryName] = useState<string>("");
-  const [visibility, setVisibility] = useState<boolean>(true);
-  const [editingCategoryId, setEditingCategoryId] = useState<number | null>(
-    null
-  );
-
   const handleOpenAddModal = () => {
-    setModalMode("add");
-    setCategoryName("");
-    setVisibility(true);
-    setEditingCategoryId(null);
-    setIsModalVisible(true);
+    router.push({
+      pathname: "/(tabs)/Management/screens/AddRemoveCategory",
+      params: { mode: "add" },
+    });
   };
 
   const handleOpenEditModal = (category: Category) => {
-    // setModalMode("edit");
-    // setCategoryName(category.name);
-    // setVisibility(true); // Assuming visibility is true by default; adjust if needed
-    // setEditingCategoryId(category.id);
-    // setIsModalVisible(true);
-
-    router.push("/(tabs)/Management/screens/AddRemoveCategory");
-  };
-
-  const handleSaveCategory = () => {
-    if (categoryName.trim()) {
-      if (modalMode === "add") {
-        const newCategory: Category = {
-          id: categories.length + 1,
-          name: categoryName.trim(),
-          serviceCount: 0,
-        };
-        setCategories([...categories, newCategory]);
-      } else if (modalMode === "edit" && editingCategoryId !== null) {
-        setCategories(
-          categories.map((cat) =>
-            cat.id === editingCategoryId
-              ? { ...cat, name: categoryName.trim() }
-              : cat
-          )
-        );
-      }
-      setCategoryName("");
-      setVisibility(true);
-      setEditingCategoryId(null);
-      setIsModalVisible(false);
-    }
+    router.push({
+      pathname: "/(tabs)/Management/screens/AddRemoveCategory",
+      params: { mode: "edit", category: JSON.stringify(category) },
+    });
   };
 
   const handleDeleteCategory = (id: number) => {
@@ -155,83 +111,6 @@ const MenuCategories: React.FC = () => {
           ))}
         </View>
       </View>
-
-      {/* Add/Edit Category Modal */}
-      <Modal
-        visible={isModalVisible}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setIsModalVisible(false)}
-      >
-        <View className="flex-1 bg-black/50 justify-center items-center px-4">
-          <View className="bg-white rounded-2xl w-full max-w-md p-6">
-            {/* Modal Header */}
-            <View className="flex-row items-center justify-between mb-6">
-              <Text className="text-xl font-semibold text-gray-900">
-                {modalMode === "add" ? "Add Category" : "Edit Category"}
-              </Text>
-              <TouchableOpacity
-                onPress={() => setIsModalVisible(false)}
-                className="p-1"
-              >
-                <Ionicons name="close" size={24} color="#6B7280" />
-              </TouchableOpacity>
-            </View>
-
-            {/* Category Name Input */}
-            <View className="mb-6">
-              <Text className="text-sm font-medium text-gray-900 mb-2">
-                Category Name <Text className="text-red-500">*</Text>
-              </Text>
-              <TextInput
-                value={categoryName}
-                onChangeText={setCategoryName}
-                placeholder="Enter category name"
-                placeholderTextColor="#9CA3AF"
-                className="bg-gray-100 rounded-lg px-4 py-3 text-base text-gray-900"
-              />
-            </View>
-
-            {/* Visibility Toggle */}
-            <View className="mb-6">
-              <View className="flex-row items-center justify-between mb-2">
-                <Text className="text-sm font-medium text-gray-900">
-                  Visibility
-                </Text>
-                <Switch
-                  value={visibility}
-                  onValueChange={setVisibility}
-                  trackColor={{ false: "#D1D5DB", true: "#000000" }}
-                  thumbColor="#FFFFFF"
-                />
-              </View>
-              <Text className="text-xs text-gray-600">
-                Control whether this category is visible to customers
-              </Text>
-            </View>
-
-            {/* Action Buttons */}
-            <View className="flex-row gap-3">
-              <TouchableOpacity
-                onPress={() => setIsModalVisible(false)}
-                className="flex-1 bg-white border border-gray-300 rounded-lg py-3"
-              >
-                <Text className="text-center font-medium text-gray-900">
-                  Cancel
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={handleSaveCategory}
-                className="flex-1 bg-black rounded-lg py-3"
-              >
-                <Text className="text-center font-medium text-white">
-                  {modalMode === "add" ? "Add" : "Save"}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
     </View>
   );
 };
