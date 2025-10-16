@@ -115,7 +115,13 @@ const Index: React.FC = () => {
                 title="Business Hours"
               />
               <MenuItem icon="users" title="Customer Management" />
-              <MenuItem icon="slash" title="Block List" />
+              <MenuItem
+                onPress={() =>
+                  router.push("/(tabs)/Management/screens/BlockList")
+                }
+                icon="slash"
+                title="Block List"
+              />
             </View>
             <View
               className="border mb-2 p-2 bg-white"

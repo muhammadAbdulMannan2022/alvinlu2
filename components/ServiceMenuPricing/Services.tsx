@@ -121,6 +121,10 @@ const ServicesScreen = () => {
         )
       );
     } else if (action === "Edit") {
+      router.push({
+        pathname: "/(tabs)/Management/screens/AddServicesForm",
+        params: { type: "edit", serviceId: selectedService.id.toString() },
+      });
       console.log("Edit service:", selectedService);
     } else if (action === "Delete") {
       setServices(services.filter((s) => s.id !== selectedService.id));
