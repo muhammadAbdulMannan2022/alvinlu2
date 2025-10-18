@@ -135,9 +135,21 @@ const Index: React.FC = () => {
             >
               {/* Booking Configuration Section */}
               <SectionHeader title="BOOKING CONFIGURATION" />
-              <MenuItem icon="star" title="VIP Priority Settings" />
+              <MenuItem
+                onPress={() =>
+                  router.push("/(tabs)/Management/screens/VipSettings")
+                }
+                icon="star"
+                title="VIP Priority Settings"
+              />
               <MenuItem icon="layout" title="Booking Page Style" />
-              <MenuItem icon="link" title="Your Booking Link" />
+              <MenuItem
+                onPress={() =>
+                  router.push("/(tabs)/Management/screens/BookingLink")
+                }
+                icon="link"
+                title="Your Booking Link"
+              />
             </View>
             <View
               className="border mb-2 p-2 bg-white"
@@ -145,7 +157,13 @@ const Index: React.FC = () => {
             >
               {/* Advanced Features Section */}
               <SectionHeader title="ADVANCED FEATURES" />
-              <MenuItem icon="message-square" title="Message center" />
+              <MenuItem
+                onPress={() =>
+                  router.push("/(tabs)/Management/screens/MessageCenterScreen")
+                }
+                icon="message-square"
+                title="Message center"
+              />
               <MenuItem icon="calendar" title="Calendar Sync" />
               <MenuItem icon="gift" title="Affiliate Center" />
             </View>
