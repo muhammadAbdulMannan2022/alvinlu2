@@ -125,7 +125,7 @@ const TeamManagement: React.FC = () => {
       <View className="bg-white px-4 py-4 border-b border-gray-200 flex-row items-center justify-between">
         <View className="flex-row items-center">
           <TouchableOpacity
-            onPress={() => router.push("/(tabs)/Management/inxex")}
+            onPress={() => router.push("/(tabs)/Management")}
             className="mr-4"
           >
             <Feather name="arrow-left" size={24} color="#000" />

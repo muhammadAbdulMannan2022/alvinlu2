@@ -260,7 +260,7 @@ const CustomerManagementScreen = () => {
           <View className="bg-white px-5 py-4 border-b border-gray-100">
             <View className="flex-row items-center">
               <TouchableOpacity
-                onPress={() => router.push("/(tabs)/Management/inxex")}
+                onPress={() => router.push("/(tabs)/Management")}
                 className="mr-3"
               >
                 <Ionicons name="arrow-back" size={24} color="#000" />

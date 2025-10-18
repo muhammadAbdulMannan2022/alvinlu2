@@ -36,7 +36,7 @@ export default function BusinessSetup() {
           style={{ borderColor: "#00000020" }}
         >
           <TouchableOpacity
-            onPress={() => router.push("/(tabs)/Management/inxex")}
+            onPress={() => router.push("/(tabs)/Management")}
             className="mr-3"
           >
             <Ionicons name="arrow-back" size={24} color="#000" />

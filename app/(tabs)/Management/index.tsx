@@ -142,7 +142,13 @@ const Index: React.FC = () => {
                 icon="star"
                 title="VIP Priority Settings"
               />
-              <MenuItem icon="layout" title="Booking Page Style" />
+              <MenuItem
+                onPress={() =>
+                  router.push("/(tabs)/Management/screens/BookingPageStyle")
+                }
+                icon="layout"
+                title="Booking Page Style"
+              />
               <MenuItem
                 onPress={() =>
                   router.push("/(tabs)/Management/screens/BookingLink")
@@ -164,7 +170,15 @@ const Index: React.FC = () => {
                 icon="message-square"
                 title="Message center"
               />
-              <MenuItem icon="calendar" title="Calendar Sync" />
+              <MenuItem
+                onPress={() =>
+                  router.push(
+                    "/(tabs)/Management/screens/CalenderSyncForSettingsPage"
+                  )
+                }
+                icon="calendar"
+                title="Calendar Sync"
+              />
               <MenuItem icon="gift" title="Affiliate Center" />
             </View>
             {/* Sign Out Button */}

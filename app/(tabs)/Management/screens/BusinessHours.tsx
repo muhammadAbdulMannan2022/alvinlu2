@@ -199,7 +199,7 @@ export default function BusinessHours() {
         >
           <TouchableOpacity
             className="mr-3"
-            onPress={() => router.push("/(tabs)/Management/inxex")}
+            onPress={() => router.push("/(tabs)/Management")}
           >
             <Ionicons name="arrow-back" size={24} color="#000" />
           </TouchableOpacity>

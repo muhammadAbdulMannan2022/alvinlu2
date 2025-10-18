@@ -181,7 +181,7 @@ const BlockListScreen = () => {
           <View className="flex-row items-center justify-between">
             <View className="flex-row items-center">
               <TouchableOpacity
-                onPress={() => router.push("/(tabs)/Management/inxex")}
+                onPress={() => router.push("/(tabs)/Management")}
                 className="mr-3"
               >
                 <Ionicons name="arrow-back" size={24} color="#000" />
