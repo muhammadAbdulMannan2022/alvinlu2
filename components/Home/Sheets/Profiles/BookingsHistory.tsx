@@ -14,7 +14,10 @@ const BookingCard = ({ service, date, price, status, addon }: any) => {
         <Text className="text-base font-medium flex-1 sm:text-lg md:text-xl ">
           {service}
         </Text>
-        <View className={`px-2 py-1 rounded-full ml-2 ${getStatusColor()}`}>
+        <View
+          className={`px-2 py-1  ml-2 ${getStatusColor()}`}
+          style={{ borderRadius: 6 }}
+        >
           <Text className="text-white text-xs sm:text-sm md:text-base ">
             {status}
           </Text>
@@ -44,7 +47,7 @@ export default function BookingHistory() {
       service: "Classic French Manicure",
       date: "2024-11-15",
       price: "¥2,500",
-      status: "Not arrived",
+      status: "No Show",
       addon: "Hand Massage",
     },
     {
@@ -52,7 +55,7 @@ export default function BookingHistory() {
       service: "Gel Manicure",
       date: "2024-12-15",
       price: "¥1,800",
-      status: "Not arrived",
+      status: "No Show",
       addon: null,
     },
     {
@@ -60,7 +63,7 @@ export default function BookingHistory() {
       service: "Nail Art Design",
       date: "2024-11-22",
       price: "¥3,200",
-      status: "Not arrived",
+      status: "No Show",
       addon: "Cuticle Treatment",
     },
   ];

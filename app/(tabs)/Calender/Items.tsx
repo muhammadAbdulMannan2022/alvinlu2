@@ -33,7 +33,9 @@ export default function Items({ data, selectedDate, openSheet1 }: ItemsProps) {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Text className="text-lg font-semibold mb-4">Today's Schedule</Text>
+      <Text className="text-lg md:text-2xl font-semibold mb-4">
+        Today's Schedule
+      </Text>
       {data.length > 0 ? (
         data.map((item, i) => (
           <View key={i} className="mb-4">

@@ -5,7 +5,6 @@ import {
   FontAwesome5,
   Ionicons,
 } from "@expo/vector-icons";
-import EvilIcons from "@expo/vector-icons/EvilIcons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { LinearGradient } from "expo-linear-gradient";
@@ -25,7 +24,7 @@ export default function Sheet1({
     client: {
       name: "Emma Chen",
       type: "Returning Client",
-      status: "Not arrived",
+      status: "No Show",
       img: "https://ui-avatars.com/api/?name=Emma+Chen&size=64&rounded=true&background=51A2FF&color=fff",
     },
     schedule: {
@@ -69,10 +68,9 @@ export default function Sheet1({
         >
           <Text className="text-lg font-semibold">Current Status</Text>
           <View
-            className="flex-row items-center gap-2 bg-[#6A7282] px-2 py-0.5"
+            className="flex-row items-center gap-2 bg-[#6A7282] px-3 py-0.5"
             style={{ alignItems: "center", borderRadius: 6 }}
           >
-            <EvilIcons name="clock" size={20} color="#fff" />
             <Text
               className="text-white text-sm font-semibold mt-1"
               style={{ lineHeight: 20 }}
@@ -97,7 +95,7 @@ export default function Sheet1({
           <View className="mt-5">
             <LinearGradient
               colors={["#EFF6FF", "#FAF5FF"]}
-              className="border-2 flex-row justify-between items-center px-6 py-4"
+              className="border flex-row justify-between items-center px-6 py-4"
               style={{ borderColor: "#BEDBFF", borderRadius: 10 }}
             >
               <View className="flex-row items-center gap-4">
@@ -128,22 +126,22 @@ export default function Sheet1({
           </View>
 
           {/* Schedule and Service */}
-          <View className="py-4">
-            <View className="flex-row gap-3">
+          <View className="py-4 mb-5">
+            <View className="flex-row gap-5">
               <View
-                className="border p-3 bg-white mb-2 min-w-[45%] flex-1"
+                className="border p-3 bg-white mb-5 min-w-[45%] flex-1"
                 style={{ borderColor: "#00000030", borderRadius: 10 }}
               >
                 <View className="flex-row items-center">
                   <FontAwesome5
                     name="clock"
-                    size={20}
+                    size={18}
                     color="#007AFF"
                     className="mr-2"
                   />
-                  <Text className="font-bold text-lg">Schedule</Text>
+                  <Text className="text-[#717182] font-bold">Schedule</Text>
                 </View>
-                <Text className="text-[#155DFC] font-bold text-lg my-2">
+                <Text className="text-[#155DFC] font-bold text-xl my-2">
                   {data.schedule.time}
                 </Text>
                 <View
@@ -161,14 +159,14 @@ export default function Sheet1({
               </View>
 
               <View
-                className="border p-3 bg-white mb-2 min-w-[45%] flex-1"
+                className="border p-3 bg-white mb-5 min-w-[45%] flex-1"
                 style={{ borderColor: "#00000030", borderRadius: 10 }}
               >
-                <View className="flex-row gap-3 items-center">
-                  <Feather name="dollar-sign" size={28} color="#00A63E" />
-                  <Text className="text-[#717182] text-xl">Service</Text>
+                <View className="flex-row gap-1 items-center">
+                  <Feather name="dollar-sign" size={20} color="#00A63E" />
+                  <Text className="text-[#717182] font-bold">Service</Text>
                 </View>
-                <Text className="text-black my-4 text-lg md:text-xl font-bold">
+                <Text className="text-black my-2 text-lg md:text-xl font-bold">
                   {data.service.type}
                 </Text>
                 <Text className="text-[#00A63E] font-bold text-xl">
@@ -179,14 +177,12 @@ export default function Sheet1({
 
             {/* Add-ons */}
             <View
-              className="border p-4 bg-white mb-2"
+              className="border p-4 bg-white mb-5"
               style={{ borderColor: "#00000030", borderRadius: 10 }}
             >
               <View className="flex-row items-center gap-3">
-                <Entypo name="plus" size={24} color="#9810FA" />
-                <Text className="font-bold text-lg text-[#717182]">
-                  Add-ons
-                </Text>
+                <Entypo name="plus" size={20} color="#9810FA" />
+                <Text className="text-[#717182] font-bold">Add-ons</Text>
               </View>
               {data.addOns.map((addon, index) => (
                 <View className="flex-row mt-3 justify-between" key={index}>
@@ -202,19 +198,19 @@ export default function Sheet1({
 
             {/* Special Requirements */}
             <View
-              className="border p-3 bg-white mb-2"
+              className="border p-3 bg-white mb-5"
               style={{ borderColor: "#00000030", borderRadius: 10 }}
             >
               <View className="gap-3">
                 <View className="flex-row gap-2 items-center">
-                  <Ionicons name="warning" size={24} color="#F54900" />
+                  <Ionicons name="warning" size={20} color="#F54900" />
                   <Text className="text-[#717182] font-bold">
                     Special Requirements
                   </Text>
                 </View>
                 <View className="flex-row">
                   <Text
-                    className="bg-[#FFE2E2] border text-red-800 py-1 px-2 mr-2"
+                    className="bg-[#FFEDD4] border text-yellow-800 py-1 px-2 mr-2"
                     style={{ borderColor: "#FFC9C9", borderRadius: 10 }}
                   >
                     Hand sensitivity
@@ -235,84 +231,82 @@ export default function Sheet1({
               style={{ borderColor: "#00000030", borderRadius: 10 }}
             >
               <View className="gap-3">
-                <View className="flex-row items-center gap-2">
+                <View className="flex-row items-center gap-1">
                   <Entypo
                     name="dots-three-horizontal"
-                    size={24}
+                    size={20}
                     color="#155DFC"
                   />
-                  <Text className="text-[#717182] font-bold text-2xl">
+                  <Text className="text-[#717182] font-bold">
                     Customer Notes
                   </Text>
                 </View>
-                <Text className="text-black text-2xl">
-                  {data.customerNotes}
-                </Text>
+                <Text className="text-black text-lg">{data.customerNotes}</Text>
               </View>
             </View>
           </View>
         </View>
+        {/* Action Buttons */}
+        {showOption ? (
+          <View
+            className="px-2 w-full py-5 -mt-5"
+            style={{ bottom: bottomBarHeight / 10 }}
+          >
+            {/* First row */}
+            <View className="flex-row justify-between mb-2 gap-2">
+              <TouchableOpacity
+                onPress={() => setShowOption(!showOption)}
+                className="bg-black p-2 rounded-lg flex-row items-center justify-center  w-[50%]"
+              >
+                <Entypo name="plus" size={16} color="white" className="mr-1" />
+                <Text className="text-white font-bold text-base">Check in</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  // setIsOpen(false);
+                  openLate(true);
+                  setShowOption(!showOption);
+                }}
+                className="bg-white border p-2 rounded-lg flex-row items-center justify-center  w-[50%]"
+              >
+                <Text className="text-black font-bold text-base">
+                  Mark as late
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* Second row */}
+            <View className="flex-row justify-between gap-2">
+              <TouchableOpacity
+                onPress={() => setShowOption(!showOption)}
+                className="bg-red-600 p-2 rounded-lg flex-row items-center justify-center w-[50%]"
+              >
+                <Entypo name="plus" size={16} color="white" className="mr-1" />
+                <Text className="text-white font-bold text-base">
+                  Mark No Show
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => setShowOption(!showOption)}
+                className="bg-white border p-2 rounded-lg flex-row items-center justify-center w-[50%]"
+              >
+                <Text className="text-black font-bold text-base">Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : (
+          <TouchableOpacity
+            onPress={() => setIsPaymentOpen(true)}
+            className="bg-[#000000] flex-row justify-center items-center gap-4 py-2.5"
+            style={{ borderRadius: 5 }}
+          >
+            <FontAwesome name="credit-card-alt" size={20} color="#fff" />
+            <Text className="text-white">Complet & Checkout</Text>
+          </TouchableOpacity>
+        )}
       </View>
-      {/* Action Buttons */}
-      {showOption ? (
-        <View
-          className="px-4 pb-4 fixed bg-red-200 w-full py-5"
-          style={{ bottom: bottomBarHeight / 2 }}
-        >
-          {/* First row */}
-          <View className="flex-row justify-between mb-2 gap-2">
-            <TouchableOpacity
-              onPress={() => setShowOption(!showOption)}
-              className="bg-black p-2 rounded-lg flex-row items-center justify-center  w-[50%]"
-            >
-              <Entypo name="plus" size={16} color="white" className="mr-1" />
-              <Text className="text-white font-bold text-base">Check in</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => {
-                // setIsOpen(false);
-                openLate(true);
-                setShowOption(!showOption);
-              }}
-              className="bg-white border p-2 rounded-lg flex-row items-center justify-center  w-[50%]"
-            >
-              <Text className="text-black font-bold text-base">
-                Mark as late
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          {/* Second row */}
-          <View className="flex-row justify-between gap-2">
-            <TouchableOpacity
-              onPress={() => setShowOption(!showOption)}
-              className="bg-red-600 p-2 rounded-lg flex-row items-center justify-center w-[50%]"
-            >
-              <Entypo name="plus" size={16} color="white" className="mr-1" />
-              <Text className="text-white font-bold text-base">
-                Mark No Show
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => setShowOption(!showOption)}
-              className="bg-white border p-2 rounded-lg flex-row items-center justify-center w-[50%]"
-            >
-              <Text className="text-black font-bold text-base">Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      ) : (
-        <TouchableOpacity
-          onPress={() => setIsPaymentOpen(true)}
-          className="bg-[#000000] flex-row justify-center items-center gap-4 py-2.5"
-          style={{ borderRadius: 5 }}
-        >
-          <FontAwesome name="credit-card-alt" size={20} color="#fff" />
-          <Text className="text-white">Complet & Checkout</Text>
-        </TouchableOpacity>
-      )}
     </ScrollView>
   );
 }

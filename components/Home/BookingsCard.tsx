@@ -53,9 +53,11 @@ export default function BookingsCard({
         >
           {/* {console.log(service_img)} */}
           <View className={`bg-black/60 h-full w-full min-w-[300px]  p-4`}>
-            <View className="flex-row justify-between">
+            <View className="flex-row justify-between mb-4">
               <View className="flex-row items-center gap-4">
-                <View className="bg-[#6A7282] px-1.5 py-1 rounded-md">
+                <View
+                  className={`${status === "Completed" ? "bg-green-500" : "bg-[#6A7282]"} ${status === "Cancelled" && "bg-red-500"} ${status === "In Progress" && "bg-yellow-600"} px-2 py-1.5 rounded-md`}
+                >
                   <Text className="text-white">{status}</Text>
                 </View>
                 {note && (
@@ -66,9 +68,9 @@ export default function BookingsCard({
                   />
                 )}
               </View>
-              <View className="bg-white p-1.5 rounded-md">
+              {/* <View className="bg-white p-1.5 rounded-md">
                 <Feather name="user" size={24} color="black" />
-              </View>
+              </View> */}
             </View>
             <View className="flex-row items-center gap-3">
               <Image
@@ -89,7 +91,7 @@ export default function BookingsCard({
               <ScrollView>
                 {service_type.map((sv_type, I) => (
                   <View className="flex-row items-center gap-2" key={I}>
-                    <Feather name="plus" size={24} color="#CDCDCD" />
+                    <Feather name="plus" size={14} color="#CDCDCD" />
                     <Text className="text-[#CDCDCD]">{sv_type}</Text>
                   </View>
                 ))}

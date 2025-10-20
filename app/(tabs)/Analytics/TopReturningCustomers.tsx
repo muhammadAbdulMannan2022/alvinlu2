@@ -62,9 +62,9 @@ const TopReturningCustomers = () => (
     className="mt-6 bg-white px-4 py-5 border"
     style={{ borderRadius: 10, borderColor: "#00000020" }}
   >
-    <View className="flex-row items-center gap-4 pb-5">
-      <MaterialCommunityIcons name="crown-outline" size={30} color="black" />
-      <Text className="text-lg font-semibold text-gray-900 mb-2">
+    <View className="flex-row gap-2 pb-5">
+      <MaterialCommunityIcons name="crown-outline" size={24} color="black" />
+      <Text className="text-lg font-semibold text-gray-900">
         Top Returning Customers - This Year
       </Text>
     </View>
@@ -73,7 +73,7 @@ const TopReturningCustomers = () => (
       {customers.map((customer) => (
         <View
           key={customer.id}
-          className="flex-row items-center bg-[#ECECF0] rounded-2xl p-3 shadow-sm"
+          className="flex-row items-center bg-[#f8f8f8] rounded-2xl p-3 shadow-sm"
         >
           {/* Rank */}
           <View className="bg-purple-100 w-10 h-10 rounded-full flex items-center justify-center">

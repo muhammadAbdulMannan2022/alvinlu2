@@ -75,13 +75,16 @@ const ServicePerformanceAnalysis = () => {
           </View>
           <View className="flex-1">
             <Text className="text-lg font-semibold text-gray-900">
-              Service Performance Analysis - This Year (TOP10)
+              Service Performance Analysis - This Year
             </Text>
           </View>
         </View>
 
         {/* Tabs */}
-        <View className="flex-row bg-gray-100 rounded-lg p-1 mt-4">
+        <View
+          className="flex-row bg-gray-100 rounded-lg p-1 mt-4"
+          style={{ borderRadius: 14 }}
+        >
           {tabs.map((tab) => (
             <TouchableOpacity
               key={tab}
@@ -89,6 +92,7 @@ const ServicePerformanceAnalysis = () => {
               className={`flex-1 py-2 px-4 rounded-md ${
                 activeTab === tab ? "bg-white" : ""
               }`}
+              style={{ borderRadius: 14 }}
             >
               <Text
                 className={`text-center text-sm font-medium ${

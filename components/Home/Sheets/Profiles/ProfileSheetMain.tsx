@@ -22,13 +22,13 @@ export default function ProfileSheetMain() {
     <View>
       <Text className="text-lg lg:text-xl mb-5 font-bold">Member Profile</Text>
       <View
-        className="flex-row justify-between items-center bg-gray-200 p-2 "
-        style={{ borderRadius: 15 }}
+        className="flex-row justify-between items-center bg-gray-200 p-1 "
+        style={{ borderRadius: 16 }}
       >
         <TouchableOpacity
           onPress={() => toggleIcon("profile")}
           className={`w-1/3 items-center ${isProfileActive && "bg-white py-2"}`}
-          style={{ borderRadius: 15 }}
+          style={{ borderRadius: 16 }}
         >
           <Ionicons
             name={"person-outline"}

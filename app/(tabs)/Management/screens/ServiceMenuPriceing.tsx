@@ -77,12 +77,16 @@ const ServiceMenuPricing: React.FC = () => {
 
       {/* Tabs */}
       <View className="bg-white px-4 py-3">
-        <View className="bg-gray-100 rounded-lg p-1 flex-row">
+        <View
+          className="bg-gray-100 rounded-lg p-1 flex-row"
+          style={{ borderRadius: 14 }}
+        >
           {["Categories", "Services", "Add-ons"].map((tab: string) => (
             <TouchableOpacity
               key={tab}
               onPress={() => setActiveTab(tab)}
               className={`flex-1 py-2 rounded-md ${activeTab === tab ? "bg-white" : ""}`}
+              style={{ borderRadius: 14 }}
             >
               <Text
                 className={`text-center font-medium ${

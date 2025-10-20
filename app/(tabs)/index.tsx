@@ -26,7 +26,7 @@ export default function Index() {
   const [data, setData] = useState([
     {
       id: 1,
-      status: "Not Arrived",
+      status: "In Progress",
       name: "Emma Chen",
       image_url:
         "https://ui-avatars.com/api/?name=Emma+Chen&size=64&rounded=true&background=51A2FF&color=fff",
@@ -74,7 +74,7 @@ export default function Index() {
     },
     {
       id: 4,
-      status: "Completed",
+      status: "Upcoming",
       name: "Noah Davis",
       image_url:
         "https://ui-avatars.com/api/?name=Noah+Davis&size=64&rounded=true&background=51A2FF&color=fff",
@@ -105,7 +105,7 @@ export default function Index() {
     },
     {
       id: 6,
-      status: "Not Arrived",
+      status: "No Show",
       name: "Mason Wilson",
       image_url:
         "https://ui-avatars.com/api/?name=Mason+Wilson&size=64&rounded=true&background=51A2FF&color=fff",
@@ -170,7 +170,7 @@ export default function Index() {
 
           {/* Today's bookings */}
           <View className="mt-4">
-            <Text className="text-xl md:text-3xl font-bold px-4">
+            <Text className="text-xl md:text-2xl font-bold px-4">
               Today's Bookings
             </Text>
             <FlatList
@@ -191,7 +191,7 @@ export default function Index() {
 
           {/* Tomorrow's Bookings */}
           <View className="mt-4">
-            <Text className="text-xl md:text-3xl font-bold px-4">
+            <Text className="text-xl md:text-2xl font-bold px-4">
               Tomorrow's Bookings
             </Text>
             <FlatList
@@ -212,8 +212,8 @@ export default function Index() {
 
           {/* Next Bookings */}
           <View className="mt-4">
-            <Text className="text-xl md:text-3xl font-bold px-4">
-              Next Bookings
+            <Text className="text-xl md:text-2xl font-bold px-4">
+              Bookings after tomorrow
             </Text>
             <FlatList
               data={nextBookings}

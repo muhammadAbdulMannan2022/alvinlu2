@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -127,9 +127,13 @@ export default function BusinessSetup() {
                 </Text>
               </View>
               <TouchableOpacity
+                className="flex-row items-center gap-1"
                 onPress={() => setIsEditingNotes(!isEditingNotes)}
               >
-                <Text className="text-blue-500 font-medium">
+                {!isEditingNotes && (
+                  <Feather name="edit" size={20} color="black" />
+                )}
+                <Text className="text-black font-medium">
                   {isEditingNotes ? "Done" : "Edit"}
                 </Text>
               </TouchableOpacity>
@@ -204,11 +208,17 @@ export default function BusinessSetup() {
                 </Text>
               </View>
               <TouchableOpacity
+                className="flex-row items-center gap-1"
                 onPress={() => setIsCEdingNotes(!isCEditingNotes)}
               >
-                <Text className="text-blue-500 font-medium">
-                  {isCEditingNotes ? "Done" : "Edit"}
-                </Text>
+                <>
+                  {!isCEditingNotes && (
+                    <Feather name="edit" size={20} color="black" />
+                  )}
+                  <Text className="text-black font-medium">
+                    {isCEditingNotes ? "Done" : "Edit"}
+                  </Text>
+                </>
               </TouchableOpacity>
             </View>
 
@@ -273,13 +283,13 @@ export default function BusinessSetup() {
       {/* Bottom Action Buttons */}
       <View className="px-4 pb-6 pt-3 bg-white border-t border-gray-200">
         <View className="flex-row gap-3">
-          <TouchableOpacity className="flex-1 bg-white border border-gray-300 rounded-full py-4 items-center">
+          <TouchableOpacity className="bg-white border p-2 rounded-lg flex-row items-center justify-center  w-[50%]">
             <Text className="text-gray-900 font-semibold text-base">
               Cancel
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity className="flex-1 bg-gray-900 rounded-full py-4 items-center">
+          <TouchableOpacity className="bg-black border p-2 rounded-lg flex-row items-center justify-center  w-[50%]">
             <Text className="text-white font-semibold text-base">
               Save Changes
             </Text>

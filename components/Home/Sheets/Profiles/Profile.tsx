@@ -47,7 +47,7 @@ export default function Profile() {
           <Text className="text-lg lg:text-2xl font-bold">
             {profileInfo.profile.name}
           </Text>
-          <View className="flex-row items-center gap-2">
+          <View className="flex-row items-start gap-2">
             <MaterialCommunityIcons
               name="crown-outline"
               size={30}
@@ -68,8 +68,8 @@ export default function Profile() {
         <View className="flex-row justify-between ">
           {/* Left Column */}
           <View className="w-1/2">
-            <View className="flex-row items-center gap-2 mb-4">
-              <MaterialCommunityIcons name="phone" size={24} color="#6B7280" />
+            <View className="flex-row items-start gap-2 mb-4">
+              <MaterialCommunityIcons name="phone" size={20} color="#6B7280" />
               <View>
                 <Text className="text-xs text-gray-500 sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
                   Phone
@@ -80,10 +80,10 @@ export default function Profile() {
               </View>
             </View>
 
-            <View className="flex-row items-center gap-2 mb-4">
+            <View className="flex-row items-start gap-2 mb-4">
               <MaterialCommunityIcons
                 name="calendar"
-                size={24}
+                size={20}
                 color="#6B7280"
               />
               <View>
@@ -96,10 +96,10 @@ export default function Profile() {
               </View>
             </View>
 
-            <View className="flex-row items-center gap-2">
+            <View className="flex-row items-start gap-2">
               <MaterialCommunityIcons
                 name="clock-outline"
-                size={24}
+                size={20}
                 color="#6B7280"
               />
               <View>
@@ -115,10 +115,10 @@ export default function Profile() {
 
           {/* Right Column */}
           <View className="w-1/2">
-            <View className="flex-row items-center gap-2 mb-4">
+            <View className="flex-row items-start gap-2 mb-4">
               <MaterialCommunityIcons
                 name="gender-female"
-                size={24}
+                size={20}
                 color="#E63946"
               />
               <View>
@@ -131,10 +131,10 @@ export default function Profile() {
               </View>
             </View>
 
-            <View className="flex-row items-center gap-2">
+            <View className="flex-row items-start gap-2">
               <MaterialCommunityIcons
                 name="calendar-check"
-                size={24}
+                size={20}
                 color="#6B7280"
               />
               <View>
@@ -155,18 +155,19 @@ export default function Profile() {
             className="mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14 2xl:mt-16 border-t pt-7"
             style={{ borderColor: "#00000040" }}
           >
-            <View className="flex-row items-start gap-2">
-              <MaterialCommunityIcons
-                name="note-text-outline"
-                size={30}
-                color="#6B7280"
-              />
-              <View className="flex-1">
+            <View className=" items-start gap-2">
+              <View className="flex-row gap-1">
+                <MaterialCommunityIcons
+                  name="note-text-outline"
+                  size={20}
+                  color="#6B7280"
+                />
                 <Text className="text-lg text-gray-500 mb-1 ">Notes</Text>
-                <Text className="text-gray-900 sm:text-base lg:text-xl ">
-                  {profileInfo.profile.notes}
-                </Text>
               </View>
+
+              <Text className="text-gray-900 sm:text-base lg:text-xl ">
+                {profileInfo.profile.notes}
+              </Text>
             </View>
           </View>
         )}
@@ -183,7 +184,7 @@ export default function Profile() {
       >
         <View className="flex-row gap-4 items-center">
           <View className="bg-[#F3E8FF] w-fit p-3" style={{ borderRadius: 8 }}>
-            <Ionicons name="wallet-outline" size={24} color="#9810FA" />
+            <Ionicons name="wallet-outline" size={20} color="#9810FA" />
           </View>
           <View>
             <Text className="text-lg font-bold text-gray-500">

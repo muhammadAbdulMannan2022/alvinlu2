@@ -85,26 +85,26 @@ export default function AnalyticsDashboard() {
       iconBg: "bg-green-100",
       icon: <MaterialCommunityIcons name="refresh" size={20} color="#10b981" />,
     },
-    {
-      title: "Gross Revenue",
-      value: "¥1,485,000",
-      change: "+20% vs previous month",
-      trend: "up",
-      iconBg: "bg-purple-100",
-      icon: (
-        <MaterialCommunityIcons name="currency-jpy" size={20} color="#a855f7" />
-      ),
-    },
-    {
-      title: "Net Revenue",
-      value: "¥1,254,800",
-      change: "+18% vs previous month",
-      trend: "up",
-      iconBg: "bg-green-100",
-      icon: (
-        <MaterialCommunityIcons name="trending-up" size={20} color="#10b981" />
-      ),
-    },
+    // {
+    //   title: "Gross Revenue",
+    //   value: "¥1,485,000",
+    //   change: "+20% vs previous month",
+    //   trend: "up",
+    //   iconBg: "bg-purple-100",
+    //   icon: (
+    //     <MaterialCommunityIcons name="currency-jpy" size={20} color="#a855f7" />
+    //   ),
+    // },
+    // {
+    //   title: "Net Revenue",
+    //   value: "¥1,254,800",
+    //   change: "+18% vs previous month",
+    //   trend: "up",
+    //   iconBg: "bg-green-100",
+    //   icon: (
+    //     <MaterialCommunityIcons name="trending-up" size={20} color="#10b981" />
+    //   ),
+    // },
     {
       title: "Gross Commission",
       value: "¥1,485,000",
@@ -144,7 +144,7 @@ export default function AnalyticsDashboard() {
 
   return (
     <SafeAreaView
-      className="flex-1 bg-gray-50"
+      className="flex-1 bg-white"
       style={{ paddingBottom: bottomBarHeight + 60 }}
     >
       <ScrollView className="flex-1">

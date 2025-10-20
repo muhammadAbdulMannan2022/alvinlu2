@@ -94,7 +94,7 @@ const AddOns: React.FC<AddOnsProps> = ({
         <View className="flex-row items-center justify-between mb-4">
           <View>
             <Text className="text-lg font-semibold text-gray-900">Add-ons</Text>
-            <Text className="text-sm text-gray-600 mt-1">3/100 services</Text>
+            <Text className="text-sm text-gray-600 mt-1">3/100 Add-ons</Text>
           </View>
           <TouchableOpacity className="bg-black rounded-lg px-4 py-2 flex-row items-center">
             <Ionicons name="add" size={20} color="#FFF" />
@@ -103,12 +103,11 @@ const AddOns: React.FC<AddOnsProps> = ({
         </View>
 
         {/* Filter Section */}
-        <View className="flex-row items-center justify-between">
+        <View className="flex">
           <View className="flex-row items-center flex-1">
-            <Ionicons name="filter-outline" size={20} color="#6B7280" />
             <TouchableOpacity
               onPress={() => setFilterDropdownVisible(!filterDropdownVisible)}
-              className="ml-2 flex-row items-center bg-white border border-gray-300 rounded-lg px-3 py-2 flex-1"
+              className="flex-row items-center bg-white border border-gray-300 rounded-lg px-3 py-2 flex-1"
             >
               <Text className="text-gray-900 flex-1">{selectedFilter}</Text>
               <Ionicons
@@ -118,11 +117,11 @@ const AddOns: React.FC<AddOnsProps> = ({
               />
             </TouchableOpacity>
           </View>
-          <View className="ml-3 bg-black rounded-lg px-3 py-2">
-            <Text className="text-white font-medium">
+          {/* <View className="rounded-lg px-3 py-2">
+            <Text className="text-sm text-gray-600 mt-1 ">
               {filteredServices.length} add-ons
             </Text>
-          </View>
+          </View> */}
         </View>
 
         {/* Filter Dropdown */}

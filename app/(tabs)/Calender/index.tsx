@@ -56,7 +56,7 @@ export default function BookingCalendar() {
   const [data, setData] = useState([
     {
       id: 1,
-      status: "Not Arrived",
+      status: "No Show",
       name: "Emma Chen",
       image_url:
         "https://ui-avatars.com/api/?name=Emma+Chen&size=64&rounded=true&background=51A2FF&color=fff",
@@ -135,7 +135,7 @@ export default function BookingCalendar() {
     },
     {
       id: 6,
-      status: "Not Arrived",
+      status: "No Show",
       name: "Mason Wilson",
       image_url:
         "https://ui-avatars.com/api/?name=Mason+Wilson&size=64&rounded=true&background=51A2FF&color=fff",
@@ -305,11 +305,11 @@ export default function BookingCalendar() {
           <View className="flex-row items-center justify-between mb-5">
             <Text className="text-xl lg:text-2xl font-bold">Calendar</Text>
             <TouchableOpacity
-              className="flex-row items-center gap-3 border px-2 py-1.5"
+              className="flex-row items-center gap-3 border px-2 py-1.5 bg-black"
               style={{ borderColor: "#00000030", borderRadius: 8 }}
             >
-              <Entypo name="plus" size={24} color="black" />
-              <Text className="font-semibold">New Booking</Text>
+              <Entypo name="plus" size={24} color="#fff" />
+              <Text className="font-semibold text-white">New Booking</Text>
             </TouchableOpacity>
           </View>
           {/* calender controles */}
@@ -367,9 +367,9 @@ export default function BookingCalendar() {
                   selectedDayBackgroundColor: "#000000",
                   selectedDayTextColor: "#ffffff",
                   todayTextColor: "#ffffff",
-                  todayBackgroundColor: "#4F46E5",
+                  todayBackgroundColor: "#000000",
                   dayTextColor: "#000000",
-                  textDisabledColor: "#D1D5DB",
+                  textDisabledColor: "#000000",
                   monthTextColor: "#000000",
                   textMonthFontWeight: "600",
                   textDayFontSize: 16,

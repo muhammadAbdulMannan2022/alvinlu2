@@ -273,77 +273,27 @@ const CustomerManagementScreen = () => {
 
           {/* Customer List Section */}
           <View className="px-5 py-4">
-            {/* Header with Pro Tag */}
-            <View className="flex-row items-center justify-between mb-3">
-              <View className="w-[70%]">
-                <Text className="text-lg font-semibold text-gray-900">
-                  Customer list
-                </Text>
-                <Text className="text-base font-semibold text-gray-500">
-                  For Unlimited booking Take pro Package .Unlimited booking Take
-                  pro Package.
-                </Text>
-              </View>
-              <View className="w-[30%] items-end gap-1">
-                <Text className="text-lg font-semibold text-gray-900">
-                  Free Plan
-                </Text>
-                <Text className="text-base font-semibold text-gray-500">
-                  Maximum 100
-                </Text>
-                <View className="bg-black rounded px-2 py-1 max-w-fit">
-                  <Text className="text-white text-xs font-semibold">
-                    Pro Plan
-                  </Text>
-                </View>
-              </View>
-            </View>
-
             {/* Stats Row */}
-            <View className="flex-row items-center justify-between mb-4 gap-3">
-              <View
-                style={{
-                  borderColor: "#00000020",
-                  borderRadius: 10,
-                  padding: 5,
-                }}
-                className="items-center border w-[30%] py-4 md:py-6"
-              >
-                <Text className="text-2xl md:text-3xl font-bold text-gray-900">
-                  {totalCustomers}
-                </Text>
-                <Text className="text-xs md:text-sm text-gray-500 mt-1">
-                  This month
+            <View
+              className="flex-row justify-between mb-4 border px-2 py-3"
+              style={{ borderColor: "#00000020", borderRadius: 10 }}
+            >
+              <View className="flex-1 bg-white rounded-2xl p-4 mr-2 items-center shadow-sm">
+                <Text className="text-3xl font-bold text-gray-900 mb-1">0</Text>
+                <Text className="text-xs text-gray-500 text-center">
+                  Total Open Slots
                 </Text>
               </View>
-              <View
-                style={{
-                  borderColor: "#00000020",
-                  borderRadius: 10,
-                  padding: 5,
-                }}
-                className="items-center border w-[30%] py-4 md:py-6"
-              >
-                <Text className="text-2xl md:text-3xl font-bold text-amber-500">
-                  {thisMonth}
-                </Text>
-                <Text className="text-xs md:text-sm text-gray-500 mt-1">
-                  Last This month
+              <View className="flex-1 bg-white rounded-2xl p-4 mx-1 items-center shadow-sm">
+                <Text className="text-3xl font-bold text-gray-900 mb-1">0</Text>
+                <Text className="text-xs text-gray-500 text-center">
+                  Open Days
                 </Text>
               </View>
-              <View
-                style={{
-                  borderColor: "#00000020",
-                  borderRadius: 10,
-                  padding: 5,
-                }}
-                className="items-center border w-[30%] py-4 md:py-6"
-              >
-                <Text className="text-2xl md:text-3xl font-bold text-blue-500">
-                  {newThisMonth}
-                </Text>
-                <Text className="text-xs md:text-sm text-gray-500 mt-1">
-                  New This month
+              <View className="flex-1 bg-white rounded-2xl p-4 ml-2 items-center shadow-sm">
+                <Text className="text-3xl font-bold text-gray-900 mb-1">0</Text>
+                <Text className="text-xs text-gray-500 text-center">
+                  Avg Slots/Day
                 </Text>
               </View>
             </View>
@@ -463,9 +413,9 @@ const CustomerManagementScreen = () => {
                     className="p-1 ml-2"
                   >
                     <Ionicons
-                      name="ellipsis-horizontal"
+                      name="ellipsis-vertical"
                       size={20}
-                      color="#9CA3AF"
+                      color="#6B7280"
                     />
                   </TouchableOpacity>
                 </View>
@@ -492,35 +442,11 @@ const CustomerManagementScreen = () => {
                 style={
                   {
                     position: "absolute",
-                    top: menuPosition.top,
+                    top: menuPosition.top - 50,
                     right: 20,
                   } as StyleProp<ViewStyle>
                 }
               >
-                <TouchableOpacity
-                  onPress={() => handleMenuAction("Cancel")}
-                  className="flex-row items-center px-4 py-3.5 border-b border-gray-100"
-                >
-                  <Ionicons
-                    name="close-circle-outline"
-                    size={18}
-                    color="#374151"
-                  />
-                  <Text className="text-base text-gray-900 ml-3 font-medium">
-                    Cancel
-                  </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  onPress={() => handleMenuAction("Block")}
-                  className="flex-row items-center px-4 py-3.5 border-b border-gray-100"
-                >
-                  <Ionicons name="ban-outline" size={18} color="#374151" />
-                  <Text className="text-base text-gray-900 ml-3 font-medium">
-                    Block
-                  </Text>
-                </TouchableOpacity>
-
                 <TouchableOpacity
                   onPress={() => handleMenuAction("View profile")}
                   className="flex-row items-center px-4 py-3.5 border-b border-gray-100"
@@ -538,6 +464,15 @@ const CustomerManagementScreen = () => {
                   <Ionicons name="pricetag-outline" size={18} color="#374151" />
                   <Text className="text-base text-gray-900 ml-3 font-medium">
                     Add badge
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => handleMenuAction("Block")}
+                  className="flex-row items-center px-4 py-3.5 border-b border-gray-100"
+                >
+                  <Ionicons name="ban-outline" size={18} color="#374151" />
+                  <Text className="text-base text-gray-900 ml-3 font-medium">
+                    Block
                   </Text>
                 </TouchableOpacity>
               </View>

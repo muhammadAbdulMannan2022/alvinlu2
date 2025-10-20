@@ -71,7 +71,10 @@ const BookingPageStyleScreen = () => {
       className="flex-1 bg-white"
       style={{ paddingBottom: bottomBarHeight + 60 }}
     >
-      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+      <ScrollView
+        className="flex-1 gap-10"
+        showsVerticalScrollIndicator={false}
+      >
         {/* Header */}
         <View className="bg-white px-4 py-4 border-b border-gray-200">
           <View className="flex-row items-center">
@@ -103,7 +106,7 @@ const BookingPageStyleScreen = () => {
           {/* Upload Box */}
           <TouchableOpacity
             onPress={() => pickImage("logo")}
-            className="bg-white border-2 border-dashed p-6 items-center"
+            className="bg-[#f1f1f1] border-2 border-dashed p-6 items-center"
             style={{ borderColor: "#D1D5DB", borderRadius: 12 }}
           >
             <View
@@ -116,14 +119,6 @@ const BookingPageStyleScreen = () => {
               Click to upload logo
             </Text>
             <Text className="text-xs text-gray-500">PNG, JPG up to 2MB</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => pickImage("logo")}
-            className="mt-3 flex-row items-center justify-center py-2"
-          >
-            <Ionicons name="image-outline" size={18} color="#6B7280" />
-            <Text className="text-sm text-gray-700 ml-2">Choose Logo File</Text>
           </TouchableOpacity>
         </View>
 
@@ -143,7 +138,7 @@ const BookingPageStyleScreen = () => {
           {/* Upload Box */}
           <TouchableOpacity
             onPress={() => pickImage("banner")}
-            className="bg-white border-2 border-dashed p-6 items-center"
+            className="bg-[#f1f1f1] border-2 border-dashed p-6 items-center"
             style={{ borderColor: "#D1D5DB", borderRadius: 12 }}
           >
             <View
@@ -156,16 +151,6 @@ const BookingPageStyleScreen = () => {
               Click to upload banner
             </Text>
             <Text className="text-xs text-gray-500">PNG, JPG up to 2MB</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => pickImage("banner")}
-            className="mt-3 flex-row items-center justify-center py-2"
-          >
-            <Ionicons name="image-outline" size={18} color="#6B7280" />
-            <Text className="text-sm text-gray-700 ml-2">
-              Choose Banner File
-            </Text>
           </TouchableOpacity>
         </View>
 

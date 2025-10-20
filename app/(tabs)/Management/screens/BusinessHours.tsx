@@ -291,7 +291,10 @@ export default function BusinessHours() {
           </View>
 
           {/* Calendar */}
-          <View className="bg-white rounded-2xl p-4 mb-4 shadow-sm">
+          <View
+            className="bg-white rounded-2xl p-4 mb-4 shadow-sm border"
+            style={{ borderColor: "#00000020" }}
+          >
             {/* Custom Calendar Header */}
             <View className="flex-row items-center justify-between mb-4">
               <View className="flex-row items-center">
@@ -360,7 +363,10 @@ export default function BusinessHours() {
           </View>
 
           {/* Editing Schedule Period */}
-          <View className="bg-white rounded-2xl p-5 shadow-sm">
+          <View
+            className="bg-white rounded-2xl p-5 shadow-sm border"
+            style={{ borderColor: "#00000020" }}
+          >
             <View className="flex-row items-center mb-3">
               <Ionicons name="settings-outline" size={20} color="#000" />
               <Text className="text-base font-semibold text-gray-900 ml-2">

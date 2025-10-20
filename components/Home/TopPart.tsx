@@ -14,9 +14,9 @@ export default function TopPart({ setIsNotificationOpen }: any) {
           </Text>
         </View>
         <TouchableOpacity onPress={() => setIsNotificationOpen(true)}>
-          <View className="relative bg-[#E9EBEF] p-3 rounded-md">
+          <View className="relative  p-3 rounded-md">
             <Feather name="bell" size={24} color="#030213" />
-            <View className="w-3 md:w-3.h-3.5 h-3 md:h-3.5 bg-[#D4183D] rounded-full absolute -right-1 -top-1" />
+            <View className="w-3 md:w-3.h-3.5 h-3 md:h-3.5 bg-[#D4183D] rounded-full absolute right-1.5 top-1.5" />
           </View>
         </TouchableOpacity>
       </View>

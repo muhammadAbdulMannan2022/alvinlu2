@@ -18,9 +18,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.muhammadabdulmannan21.nailstudio",
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ]
+      "permissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
       "bundler": "metro",
@@ -53,6 +51,11 @@
       "router": {},
       "eas": {
         "projectId": "93d7f7de-7b48-48a2-9fd6-4d4c50c7d24a"
+      }
+    },
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": ["react-native-chart-kit"]
       }
     }
   }

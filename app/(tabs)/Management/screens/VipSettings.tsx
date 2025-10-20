@@ -236,7 +236,8 @@ const VIPPrioritySettings = () => {
           {badges.map((badge) => (
             <View
               key={badge.id}
-              className="bg-gray-50 rounded-lg p-4 mb-3 flex-row items-center"
+              className="bg-white rounded-lg p-4 mb-3 flex-row items-center border"
+              style={{ borderColor: "#00000020" }}
             >
               <View className="flex-1 flex-row items-center">
                 <View className="items-center mr-4">
@@ -350,7 +351,8 @@ const VIPPrioritySettings = () => {
           {filteredCustomers.map((customer) => (
             <View
               key={customer.id}
-              className="flex-row items-center py-4 border-b border-gray-100"
+              className="flex-row items-start py-4 border px-4 my-1.5"
+              style={{ borderColor: "#00000020", borderRadius: 14 }}
             >
               {/* Avatar */}
               <Image
@@ -397,11 +399,7 @@ const VIPPrioritySettings = () => {
                 onPress={() => handleCustomerMenuPress(customer)}
                 className="p-1"
               >
-                <Ionicons
-                  name="ellipsis-horizontal"
-                  size={20}
-                  color="#6B7280"
-                />
+                <Ionicons name="ellipsis-vertical" size={20} color="#6B7280" />
               </TouchableOpacity>
             </View>
           ))}
